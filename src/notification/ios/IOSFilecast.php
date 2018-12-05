@@ -1,33 +1,48 @@
 <?php
+
+/*
+ * This file is part of the hedeqiang/umeng.
+ *
+ * (c) hedeqiang <laravel_code@163.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace Hedeqiang\UMeng\notification\ios;
 
 use Hedeqiang\UMeng\notification\IOSNotification;
 
-class IOSFilecast extends IOSNotification {
-	function  __construct() {
-		parent::__construct();
-		$this->data["type"] = "filecast";
-		$this->data["file_id"]  = NULL;
-	}
+class IOSFilecast extends IOSNotification
+{
+    public function __construct()
+    {
+        parent::__construct();
+        $this->data['type'] = 'filecast';
+        $this->data['file_id'] = null;
+    }
 
-	//return file_id if SUCCESS, else throw Exception with details.
-	function uploadContents($content) {
-		if ($this->data["appkey"] == NULL)
-			throw new Exception("appkey should not be NULL!");
-		if ($this->data["timestamp"] == NULL)
-			throw new Exception("timestamp should not be NULL!");
-		if (!is_string($content))
-			throw new Exception("content should be a string!");
-
-		$post = array("appkey"           => $this->data["appkey"],
-					  "timestamp"        => $this->data["timestamp"], 
-					  "content"          => $content
-					  );
-		$url = $this->host . $this->uploadPath;
-		$postBody = json_encode($post);
-		$sign = md5("POST" . $url . $postBody . $this->appMasterSecret);
-		$url = $url . "?sign=" . $sign;
-		$ch = curl_init($url);
+    //return file_id if SUCCESS, else throw Exception with details.
+    public function uploadContents($content)
+    {
+        if (null == $this->data['appkey']) {
+            throw new Exception('appkey should not be NULL!');
+        }
+        if (null == $this->data['timestamp']) {
+            throw new Exception('timestamp should not be NULL!');
+        }
+        if (!is_string($content)) {
+            throw new Exception('content should be a string!');
+        }
+        $post = array('appkey' => $this->data['appkey'],
+                      'timestamp' => $this->data['timestamp'],
+                      'content' => $content,
+                      );
+        $url = $this->host.$this->uploadPath;
+        $postBody = json_encode($post);
+        $sign = md5('POST'.$url.$postBody.$this->appMasterSecret);
+        $url = $url.'?sign='.$sign;
+        $ch = curl_init($url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_BINARYTRANSFER, 1);
         curl_setopt($ch, CURLOPT_POST, 1);
@@ -39,22 +54,26 @@ class IOSFilecast extends IOSNotification {
         $curlErrNo = curl_errno($ch);
         $curlErr = curl_error($ch);
         curl_close($ch);
-        print($result . "\r\n");
-        if ($httpCode == "0") //time out 
-        	throw new Exception("Curl error number:" . $curlErrNo . " , Curl error details:" . $curlErr . "\r\n");
-        else if ($httpCode != "200") //we did send the notifition out and got a non-200 response
-        	throw new Exception("http code:" . $httpCode . " details:" . $result . "\r\n");
-        $returnData = json_decode($result, TRUE);
-        if ($returnData["ret"] == "FAIL")
-        	throw new Exception("Failed to upload file, details:" . $result . "\r\n");
-        else
-        	$this->data["file_id"] = $returnData["data"]["file_id"];
-	}
+        echo $result."\r\n";
+        if ('0' == $httpCode) { //time out
+            throw new Exception('Curl error number:'.$curlErrNo.' , Curl error details:'.$curlErr."\r\n");
+        } elseif ('200' != $httpCode) { //we did send the notifition out and got a non-200 response
+            throw new Exception('http code:'.$httpCode.' details:'.$result."\r\n");
+        }
+        $returnData = json_decode($result, true);
+        if ('FAIL' == $returnData['ret']) {
+            throw new Exception('Failed to upload file, details:'.$result."\r\n");
+        } else {
+            $this->data['file_id'] = $returnData['data']['file_id'];
+        }
+    }
 
-	function getFileId() {
-		if (array_key_exists("file_id", $this->data))
-			return $this->data["file_id"];
-		return NULL;
-	}
+    public function getFileId()
+    {
+        if (array_key_exists('file_id', $this->data)) {
+            return $this->data['file_id'];
+        }
 
+        return null;
+    }
 }
