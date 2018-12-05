@@ -1,0 +1,19 @@
+{
+    "name": "hedeqiang\/umeng",
+    "description": "友盟推送",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "hedeqiang",
+            "email": "laravel_code@163.com"
+        }
+    ],
+    "require": {
+        "guzzlehttp/guzzle": "^6.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "Hedeqiang\\UMeng\\": "./src/"
+        }
+    }
+}
