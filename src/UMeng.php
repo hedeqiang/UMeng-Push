@@ -22,7 +22,7 @@ use Hedeqiang\UMeng\notification\ios\IOSFilecast;
 use Hedeqiang\UMeng\notification\ios\IOSGroupcast;
 use Hedeqiang\UMeng\notification\ios\IOSUnicast;
 
-class SendUMeng
+class UMeng
 {
     protected $appkey = null;
 
