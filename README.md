@@ -29,7 +29,6 @@ $w = new SendUMeng($android_AppKey,$android_Master_Secret,true);
 
 
 $alias = 113;
-                //return $alias;
 $alias_type = 'APP';
 $ticker = '通知';
 $title = '通知';
