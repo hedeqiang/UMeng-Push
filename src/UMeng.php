@@ -54,7 +54,7 @@ class UMeng
             $brocast->setPredefinedKeyValue('text', $text);
             $brocast->setPredefinedKeyValue('after_open', $after_open);
             if ('go_url' == $after_open) {
-                $customizedcast->setPredefinedKeyValue('url', $url);
+                $brocast->setPredefinedKeyValue('url', $url);
             }
             // Set 'production_mode' to 'false' if it's a test device.
             // For how to register a test device, please see the developer doc.
@@ -83,7 +83,7 @@ class UMeng
             $unicast->setPredefinedKeyValue('text', $text);
             $unicast->setPredefinedKeyValue('after_open', $after_open);
             if ('go_url' == $after_open) {
-                $customizedcast->setPredefinedKeyValue('url', $url);
+                $unicast->setPredefinedKeyValue('url', $url);
             }
             // Set 'production_mode' to 'false' if it's a test device.
             // For how to register a test device, please see the developer doc.
@@ -110,7 +110,7 @@ class UMeng
             $filecast->setPredefinedKeyValue('text', $text);
             $filecast->setPredefinedKeyValue('after_open', $after_open);  //go to app
             if ('go_url' == $after_open) {
-                $customizedcast->setPredefinedKeyValue('url', $url);
+                $filecast->setPredefinedKeyValue('url', $url);
             }
             //print("Uploading file contents, please wait...\r\n");
             // Upload your device tokens, and use '\n' to split them if there are multiple tokens
@@ -156,7 +156,7 @@ class UMeng
             $groupcast->setPredefinedKeyValue('text', $text);
             $groupcast->setPredefinedKeyValue('after_open', $after_open);
             if ('go_url' == $after_open) {
-                $customizedcast->setPredefinedKeyValue('url', $url);
+                $groupcast->setPredefinedKeyValue('url', $url);
             }
             // Set 'production_mode' to 'false' if it's a test device.
             // For how to register a test device, please see the developer doc.
