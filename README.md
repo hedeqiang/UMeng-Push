@@ -11,17 +11,36 @@ $ composer require hedeqiang/umeng -vvv
 
 ## Usage
 
-TODO
+```php
+require __DIR__ .'/vendor/autoload.php';
 
-## Contributing
+use Hedeqiang\UMeng\SendUMeng;
 
-You can contribute in one of three ways:
+//安卓 友盟 KEY
+$android_AppKey = '5b1df163f29d98*****';
+$android_Message_Secret = '19077a28fb4c1ef3*****';
+$android_Master_Secret = 'i7tzdarswtrjw2yok*******';
 
-1. File bug reports using the [issue tracker](https://github.com/hedeqiang/umeng/issues).
-2. Answer questions or fix bugs on the [issue tracker](https://github.com/hedeqiang/umeng/issues).
-3. Contribute new features or update the wiki.
+//IOS 友盟 KEY and secret
+$ios_AppKey = '5b1df0d1f29d**********';
+$ios_Master_Secret = 'fa9ry9kdk8na9pfqsk***********';
 
-_The code contribution process is not very formal. You just need to make sure that you follow the PSR-0, PSR-1, and PSR-2 coding guidelines. Any new code contributions must be accompanied by unit tests where applicable._
+$w = new SendUMeng($android_AppKey,$android_Master_Secret,true);
+
+
+$alias = 113;
+                //return $alias;
+$alias_type = 'APP';
+$ticker = '通知';
+$title = '通知';
+$text = 'test ';
+$w->sendAndroidCustomizedcast($alias, $alias_type, $ticker, $title, $text,'go_app');
+
+$send = new SendUMeng($ios_AppKey, $ios_Master_Secret,true);
+$send->sendIOSCustomizedcast($alias, $alias_type, $title, $text);
+
+```
+
 
 ## License
 
