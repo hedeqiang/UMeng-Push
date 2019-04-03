@@ -17,6 +17,10 @@ use Hedeqiang\UMeng\notification\ios\IOSFilecast;
 use Hedeqiang\UMeng\notification\ios\IOSGroupcast;
 use Hedeqiang\UMeng\notification\ios\IOSUnicast;
 
+/**
+ * Class IOS
+ * @package Hedeqiang\UMeng
+ */
 class IOS
 {
     protected $appkey = null;
