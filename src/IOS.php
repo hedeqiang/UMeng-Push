@@ -18,8 +18,7 @@ use Hedeqiang\UMeng\notification\ios\IOSGroupcast;
 use Hedeqiang\UMeng\notification\ios\IOSUnicast;
 
 /**
- * Class IOS
- * @package Hedeqiang\UMeng
+ * Class IOS.
  */
 class IOS
 {
