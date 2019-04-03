@@ -14,7 +14,7 @@ $ composer require hedeqiang/umeng -vvv
 ```php
 require __DIR__ .'/vendor/autoload.php';
 
-use Hedeqiang\UMeng\SendUMeng;
+use Hedeqiang\UMeng\UMeng;
 
 //安卓 友盟 KEY
 $android_AppKey = '5b1df163f29d98*****';
@@ -25,7 +25,7 @@ $android_Master_Secret = 'i7tzdarswtrjw2yok*******';
 $ios_AppKey = '5b1df0d1f29d**********';
 $ios_Master_Secret = 'fa9ry9kdk8na9pfqsk***********';
 
-$w = new SendUMeng($android_AppKey,$android_Master_Secret,true);
+$w = new UMeng($android_AppKey,$android_Master_Secret,true);
 
 
 $alias = 113;
@@ -35,7 +35,7 @@ $title = '通知';
 $text = 'test ';
 $w->sendAndroidCustomizedcast($alias, $alias_type, $ticker, $title, $text,'go_app');
 
-$send = new SendUMeng($ios_AppKey, $ios_Master_Secret,true);
+$send = new UMeng($ios_AppKey, $ios_Master_Secret,true);
 $send->sendIOSCustomizedcast($alias, $alias_type, $title, $text);
 
 ```
