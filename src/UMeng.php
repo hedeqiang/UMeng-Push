@@ -11,6 +11,8 @@
 
 namespace Hedeqiang\UMeng;
 
+use Hedeqiang\UMeng\Exceptions\HttpException;
+use Hedeqiang\UMeng\Exceptions\InvalidArgumentException;
 use Hedeqiang\UMeng\notification\android\AndroidBroadcast;
 use Hedeqiang\UMeng\notification\android\AndroidCustomizedcast;
 use Hedeqiang\UMeng\notification\android\AndroidFilecast;
@@ -62,10 +64,10 @@ class UMeng
             // [optional]Set extra fields
             $brocast->setExtraField('test', 'helloworld');
             //print("Sending broadcast notification, please wait...\r\n");
-            $brocast->send();
+            return $brocast->send();
             //print("Sent SUCCESS\r\n");
         } catch (\Exception $e) {
-            echo 'Caught exception: '.$e->getMessage();
+            throw new \Exception($e->getMessage(), $e->getCode(), $e);
         }
     }
 
@@ -91,10 +93,10 @@ class UMeng
             // Set extra fields
             $unicast->setExtraField('test', 'helloworld');
             //print("Sending unicast notification, please wait...\r\n");
-            $unicast->send();
+            return $unicast->send();
             //print("Sent SUCCESS\r\n");
         } catch (\Exception $e) {
-            echo 'Caught exception: '.$e->getMessage();
+            throw new \Exception($e->getMessage(), $e->getCode(), $e);
         }
     }
 
@@ -116,10 +118,10 @@ class UMeng
             // Upload your device tokens, and use '\n' to split them if there are multiple tokens
             $filecast->uploadContents('aa'."\n".'bb');
             //print("Sending filecast notification, please wait...\r\n");
-            $filecast->send();
+            return $filecast->send();
             //print("Sent SUCCESS\r\n");
         } catch (\Exception $e) {
-            echo 'Caught exception: '.$e->getMessage();
+            throw new \Exception($e->getMessage(), $e->getCode(), $e);
         }
     }
 
@@ -162,10 +164,10 @@ class UMeng
             // For how to register a test device, please see the developer doc.
             $groupcast->setPredefinedKeyValue('production_mode', $this->production_mode);
             //print("Sending groupcast notification, please wait...\r\n");
-            $groupcast->send();
+            return $groupcast->send();
             //print("Sent SUCCESS\r\n");
         } catch (\Exception $e) {
-            echo 'Caught exception: '.$e->getMessage();
+            throw new \Exception($e->getMessage(), $e->getCode(), $e);
         }
     }
 
@@ -190,10 +192,10 @@ class UMeng
                 $customizedcast->setPredefinedKeyValue('url', $url);
             }
             //print("Sending customizedcast notification, please wait...\r\n");
-            $customizedcast->send();
+            return $customizedcast->send();
             //print("Sent SUCCESS\r\n");
         } catch (\Exception $e) {
-            echo 'Caught exception: '.$e->getMessage();
+            throw new \Exception($e->getMessage(), $e->getCode(), $e);
         }
     }
 
@@ -217,10 +219,10 @@ class UMeng
                 $customizedcast->setPredefinedKeyValue('url', $url);
             }
             //print("Sending customizedcast notification, please wait...\r\n");
-            $customizedcast->send();
+            return $customizedcast->send();
             //print("Sent SUCCESS\r\n");
         } catch (\Exception $e) {
-            echo 'Caught exception: '.$e->getMessage();
+            throw new \Exception($e->getMessage(), $e->getCode(), $e);
         }
     }
 
@@ -240,10 +242,10 @@ class UMeng
             // Set customized fields
             $brocast->setCustomizedField('test', 'helloworld');
             //print("Sending broadcast notification, please wait...\r\n");
-            $brocast->send();
+            return $brocast->send();
             //print("Sent SUCCESS\r\n");
         } catch (\Exception $e) {
-            echo 'Caught exception: '.$e->getMessage();
+            throw new \Exception($e->getMessage(), $e->getCode(), $e);
         }
     }
 
@@ -264,10 +266,10 @@ class UMeng
             // Set customized fields
             $unicast->setCustomizedField('test', 'helloworld');
             //print("Sending unicast notification, please wait...\r\n");
-            $unicast->send();
+            return $unicast->send();
             //print("Sent SUCCESS\r\n");
         } catch (\Exception $e) {
-            echo 'Caught exception: '.$e->getMessage();
+            throw new \Exception($e->getMessage(), $e->getCode(), $e);
         }
     }
 
@@ -288,10 +290,10 @@ class UMeng
             // Upload your device tokens, and use '\n' to split them if there are multiple tokens
             $filecast->uploadContents('aa'."\n".'bb');
             echo "Sending filecast notification, please wait...\r\n";
-            $filecast->send();
+            return $filecast->send();
             //print("Sent SUCCESS\r\n");
         } catch (\Exception $e) {
-            echo 'Caught exception: '.$e->getMessage();
+            throw new \Exception($e->getMessage(), $e->getCode(), $e);
         }
     }
 
@@ -330,13 +332,21 @@ class UMeng
             // Set 'production_mode' to 'true' if your app is under production mode
             $groupcast->setPredefinedKeyValue('production_mode', $this->production_mode);
             //print("Sending groupcast notification, please wait...\r\n");
-            $groupcast->send();
+            return $groupcast->send();
             //print("Sent SUCCESS\r\n");
         } catch (\Exception $e) {
-            echo 'Caught exception: '.$e->getMessage();
+            throw new \Exception($e->getMessage(), $e->getCode(), $e);
         }
     }
 
+    /**
+     * @param $alias
+     * @param $alias_type
+     * @param $alert
+     * @param $content
+     * @return mixed
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
     public function sendIOSCustomizedcast($alias, $alias_type, $alert, $content)
     {
         $data = [];
@@ -364,10 +374,10 @@ class UMeng
             // Set 'production_mode' to 'true' if your app is under production mode
             $customizedcast->setPredefinedKeyValue('production_mode', $this->production_mode);
             //print("Sending customizedcast notification, please wait...\r\n");
-            $customizedcast->send();
+            return $customizedcast->send();
             //print("Sent SUCCESS\r\n");
         } catch (\Exception $e) {
-            echo 'Caught exception: '.$e->getMessage();
+            throw new \Exception($e->getMessage(), $e->getCode(), $e);
         }
     }
 }

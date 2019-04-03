@@ -11,6 +11,10 @@
 
 namespace Hedeqiang\UMeng\notification;
 
+use GuzzleHttp\Client;
+use GuzzleHttp\Exception\GuzzleException;
+use Hedeqiang\UMeng\Exceptions\HttpException;
+
 abstract class UmengNotification
 {
     // The host
@@ -84,7 +88,12 @@ abstract class UmengNotification
     // Set key/value for $data array, for the keys which can be set please see $DATA_KEYS, $PAYLOAD_KEYS, $BODY_KEYS, $POLICY_KEYS
     abstract public function setPredefinedKeyValue($key, $value);
 
-    //send the notification to umeng, return response data if SUCCESS , otherwise throw Exception with details.
+    /**
+     * send the notification to umeng, return response data if SUCCESS , otherwise throw Exception with details.
+     * @return mixed
+     * @throws GuzzleException
+     * @throws HttpException
+     */
     public function send()
     {
         //check the fields to make sure that they are not NULL
@@ -94,35 +103,16 @@ abstract class UmengNotification
         $postBody = json_encode($this->data);
         $sign = md5('POST'.$url.$postBody.$this->appMasterSecret);
         $url = $url.'?sign='.$sign;
-        $ch = curl_init($url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_BINARYTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_POST, 1);
-        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 60);
-        curl_setopt($ch, CURLOPT_TIMEOUT, 60);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $postBody);
-        $result = curl_exec($ch);
-        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-        $curlErrNo = curl_errno($ch);
-        $curlErr = curl_error($ch);
-        curl_close($ch);
-        echo $result."\r\n";
-        if ('0' == $httpCode) {
-            // Time out
-//            return [
-//                'Curl_error_number' => $curlErrNo,
-//                'Curl_error_details' => $curlErr
-//            ];
-            throw new \Exception('Curl error number:'.$curlErrNo.' , Curl error details:'.$curlErr."\r\n");
-        } elseif ('200' != $httpCode) {
-            // We did send the notifition out and got a non-200 response
-//            return [
-//                'Http_code' => $httpCode,
-//                'details' => $result .'\r\n',
-//                ];
-            throw new \Exception('Http code:'.$httpCode.' details:'.$result."\r\n");
-        } else {
-            return $result;
+
+        try {
+            $client = new Client();
+            $response = $client->request('POST', $url, [
+                'body' => $postBody
+            ]);//echo  $xml;
+            return \json_decode($response->getBody()->getContents(), true);
+        } catch (\Exception $e) {
+            throw new HttpException($e->getMessage(), $e->getCode(), $e);
         }
+
     }
 }

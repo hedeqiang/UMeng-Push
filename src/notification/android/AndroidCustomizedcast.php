@@ -63,7 +63,7 @@ class AndroidCustomizedcast extends AndroidNotification
         $curlErrNo = curl_errno($ch);
         $curlErr = curl_error($ch);
         curl_close($ch);
-        echo $result."\r\n";
+        //return $result;
         if ('0' == $httpCode) { //time out
             throw new \Exception('Curl error number:'.$curlErrNo.' , Curl error details:'.$curlErr."\r\n");
         } elseif ('200' != $httpCode) { //we did send the notifition out and got a non-200 response
@@ -75,6 +75,7 @@ class AndroidCustomizedcast extends AndroidNotification
         } else {
             $this->data['file_id'] = $returnData['data']['file_id'];
         }
+        return $returnData;
     }
 
     public function getFileId()
