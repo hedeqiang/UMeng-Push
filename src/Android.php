@@ -16,11 +16,6 @@ use Hedeqiang\UMeng\notification\android\AndroidCustomizedcast;
 use Hedeqiang\UMeng\notification\android\AndroidFilecast;
 use Hedeqiang\UMeng\notification\android\AndroidGroupcast;
 use Hedeqiang\UMeng\notification\android\AndroidUnicast;
-use Hedeqiang\UMeng\notification\ios\IOSBroadcast;
-use Hedeqiang\UMeng\notification\ios\IOSCustomizedcast;
-use Hedeqiang\UMeng\notification\ios\IOSFilecast;
-use Hedeqiang\UMeng\notification\ios\IOSGroupcast;
-use Hedeqiang\UMeng\notification\ios\IOSUnicast;
 
 /**
  * Class Android
