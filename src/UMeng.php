@@ -11,8 +11,6 @@
 
 namespace Hedeqiang\UMeng;
 
-use Hedeqiang\UMeng\Exceptions\HttpException;
-use Hedeqiang\UMeng\Exceptions\InvalidArgumentException;
 use Hedeqiang\UMeng\notification\android\AndroidBroadcast;
 use Hedeqiang\UMeng\notification\android\AndroidCustomizedcast;
 use Hedeqiang\UMeng\notification\android\AndroidFilecast;
@@ -290,6 +288,7 @@ class UMeng
             // Upload your device tokens, and use '\n' to split them if there are multiple tokens
             $filecast->uploadContents('aa'."\n".'bb');
             echo "Sending filecast notification, please wait...\r\n";
+
             return $filecast->send();
             //print("Sent SUCCESS\r\n");
         } catch (\Exception $e) {
@@ -344,7 +343,9 @@ class UMeng
      * @param $alias_type
      * @param $alert
      * @param $content
+     *
      * @return mixed
+     *
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function sendIOSCustomizedcast($alias, $alias_type, $alert, $content)

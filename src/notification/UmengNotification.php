@@ -90,7 +90,9 @@ abstract class UmengNotification
 
     /**
      * send the notification to umeng, return response data if SUCCESS , otherwise throw Exception with details.
+     *
      * @return mixed
+     *
      * @throws GuzzleException
      * @throws HttpException
      */
@@ -107,12 +109,11 @@ abstract class UmengNotification
         try {
             $client = new Client();
             $response = $client->request('POST', $url, [
-                'body' => $postBody
-            ]);//echo  $xml;
+                'body' => $postBody,
+            ]); //echo  $xml;
             return \json_decode($response->getBody()->getContents(), true);
         } catch (\Exception $e) {
             throw new HttpException($e->getMessage(), $e->getCode(), $e);
         }
-
     }
 }

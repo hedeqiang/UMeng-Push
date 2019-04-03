@@ -75,6 +75,7 @@ class AndroidCustomizedcast extends AndroidNotification
         } else {
             $this->data['file_id'] = $returnData['data']['file_id'];
         }
+
         return $returnData;
     }
 
