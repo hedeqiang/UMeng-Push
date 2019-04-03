@@ -12,7 +12,6 @@
 namespace Hedeqiang\UMeng\notification;
 
 use GuzzleHttp\Client;
-use GuzzleHttp\Exception\GuzzleException;
 use Hedeqiang\UMeng\Exceptions\HttpException;
 
 abstract class UmengNotification

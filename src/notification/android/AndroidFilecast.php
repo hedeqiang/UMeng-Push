@@ -11,6 +11,7 @@
 
 namespace Hedeqiang\UMeng\notification\android;
 
+use GuzzleHttp\Client;
 use Hedeqiang\UMeng\notification\AndroidNotification;
 
 class AndroidFilecast extends AndroidNotification
@@ -42,29 +43,15 @@ class AndroidFilecast extends AndroidNotification
         $postBody = json_encode($post);
         $sign = md5('POST'.$url.$postBody.$this->appMasterSecret);
         $url = $url.'?sign='.$sign;
-        $ch = curl_init($url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_BINARYTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_POST, 1);
-        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 60);
-        curl_setopt($ch, CURLOPT_TIMEOUT, 60);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $postBody);
-        $result = curl_exec($ch);
-        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-        $curlErrNo = curl_errno($ch);
-        $curlErr = curl_error($ch);
-        curl_close($ch);
-        echo $result."\r\n";
-        if ('0' == $httpCode) { //time out
-            throw new Exception('Curl error number:'.$curlErrNo.' , Curl error details:'.$curlErr."\r\n");
-        } elseif ('200' != $httpCode) { //we did send the notifition out and got a non-200 response
-            throw new Exception('http code:'.$httpCode.' details:'.$result."\r\n");
-        }
-        $returnData = json_decode($result, true);
-        if ('FAIL' == $returnData['ret']) {
-            throw new Exception('Failed to upload file, details:'.$result."\r\n");
-        } else {
-            $this->data['file_id'] = $returnData['data']['file_id'];
+
+        try {
+            $client = new Client();
+            $response = $client->request('POST', $url, [
+                'body' => $postBody,
+            ]); //echo  $xml;
+            return \json_decode($response->getBody()->getContents(), true);
+        } catch (\Exception $e) {
+            throw new HttpException($e->getMessage(), $e->getCode(), $e);
         }
     }
 
