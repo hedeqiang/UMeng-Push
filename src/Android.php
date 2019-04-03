@@ -18,8 +18,7 @@ use Hedeqiang\UMeng\notification\android\AndroidGroupcast;
 use Hedeqiang\UMeng\notification\android\AndroidUnicast;
 
 /**
- * Class Android
- * @package Hedeqiang\UMeng
+ * Class Android.
  */
 class Android
 {
