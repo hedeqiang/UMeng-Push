@@ -14,31 +14,36 @@ namespace Hedeqiang\UMeng\notification;
 abstract class AndroidNotification extends UmengNotification
 {
     // The array for payload, please see API doc for more information
-    protected $androidPayload = array(
-                                    'display_type' => 'notification',
-                                    'body' => array(
-                                                            'ticker' => null,
-                                                            'title' => null,
-                                                            'text' => null,
-                                                            //"icon"       => "xx",
-                                                            //largeIcon    => "xx",
-                                                            'play_vibrate' => 'true',
-                                                            'play_lights' => 'true',
-                                                            'play_sound' => 'true',
-                                                            'after_open' => null,
-                                                            //"url"        => "xx",
-                                                            //"activity"   => "xx",
-                                                            //custom       => "xx"
-                                                        ),
-                                    //"extra"       => array("key1" => "value1", "key2" => "value2")
-                                );
+    protected $androidPayload = [
+        'display_type' => 'notification',
+        'body' => [
+            'ticker' => null,
+            'title' => null,
+            'text' => null,
+            //"icon"       => "xx",
+            //largeIcon    => "xx",
+            'play_vibrate' => 'true',
+            'play_lights' => 'true',
+            'play_sound' => 'true',
+            'after_open' => null,
+            //"url"        => "xx",
+            //"activity"   => "xx",
+            //custom       => "xx"
+
+            "extra"       => [],
+        ]
+
+    ];
+
 
     // Keys can be set in the payload level
     protected $PAYLOAD_KEYS = array('display_type');
 
     // Keys can be set in the body level
-    protected $BODY_KEYS = array('ticker', 'title', 'text', 'builder_id', 'icon', 'largeIcon', 'img', 'play_vibrate', 'play_lights', 'play_sound', 'after_open', 'url',
-                                    'activity', 'custom', );
+    protected $BODY_KEYS = array(
+        'ticker', 'title', 'text', 'builder_id', 'icon', 'largeIcon', 'img', 'play_vibrate', 'play_lights', 'play_sound', 'after_open', 'url',
+        'activity', 'custom',
+    );
 
     public function __construct()
     {

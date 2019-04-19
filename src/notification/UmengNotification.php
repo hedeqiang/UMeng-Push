@@ -33,29 +33,31 @@ abstract class UmengNotification
      * 1)The key/value pairs in comments are optional.
      * 2)The value for key 'payload' is set in the subclass(AndroidNotification or IOSNotification), as their payload structures are different.
      */
-    protected $data = array(
-            'appkey' => null,
-            'timestamp' => null,
-            'type' => null,
-            //"device_tokens"  => "xx",
-            //"alias"          => "xx",
-            //"file_id"        => "xx",
-            //"filter"         => "xx",
-            //"policy"         => array("start_time" => "xx", "expire_time" => "xx", "max_send_num" => "xx"),
-            'production_mode' => 'true',
-            //"feedback"       => "xx",
-            //"description"    => "xx",
-            //"thirdparty_id"  => "xx"
-    );
+    protected $data = [
+        'appkey' => null,
+        'timestamp' => null,
+        'type' => null,
+        //"device_tokens"  => "xx",
+        //"alias"          => "xx",
+        //"file_id"        => "xx",
+        //"filter"         => "xx",
+        //"policy"         => array("start_time" => "xx", "expire_time" => "xx", "max_send_num" => "xx"),
+        'production_mode' => 'true',
+        //"feedback"       => "xx",
+        //"description"    => "xx",
+        //"thirdparty_id"  => "xx"
+    ];
 
-    protected $DATA_KEYS = array('appkey', 'timestamp', 'type', 'device_tokens', 'alias', 'alias_type', 'file_id', 'filter', 'production_mode',
-                                    'feedback', 'description', 'thirdparty_id', );
 
-    protected $POLICY_KEYS = array('start_time', 'expire_time', 'max_send_num');
+    protected $DATA_KEYS = [
+        'appkey', 'timestamp', 'type', 'device_tokens', 'alias', 'alias_type', 'file_id', 'filter', 'production_mode',
+        'feedback', 'description', 'thirdparty_id',
+    ];
+
+    protected $POLICY_KEYS = ['start_time', 'expire_time', 'max_send_num'];
 
     public function __construct()
-    {
-    }
+    { }
 
     public function setAppMasterSecret($secret)
     {
@@ -77,7 +79,7 @@ abstract class UmengNotification
     {
         foreach ($arr as $key => $value) {
             if (is_null($value)) {
-                throw new \Exception($key.' is NULL!');
+                throw new \Exception($key . ' is NULL!');
             } elseif (is_array($value)) {
                 $this->checkArrayValues($value);
             }
@@ -89,21 +91,19 @@ abstract class UmengNotification
 
     /**
      * send the notification to umeng, return response data if SUCCESS , otherwise throw Exception with details.
-     *
      * @return mixed
-     *
-     * @throws GuzzleException
      * @throws HttpException
+     * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function send()
     {
         //check the fields to make sure that they are not NULL
         $this->isComplete();
 
-        $url = $this->host.$this->postPath;
+        $url = $this->host . $this->postPath;
         $postBody = json_encode($this->data);
-        $sign = md5('POST'.$url.$postBody.$this->appMasterSecret);
-        $url = $url.'?sign='.$sign;
+        $sign = md5('POST' . $url . $postBody . $this->appMasterSecret);
+        $url = $url . '?sign=' . $sign;
 
         try {
             $client = new Client();
