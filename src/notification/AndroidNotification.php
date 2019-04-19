@@ -30,11 +30,9 @@ abstract class AndroidNotification extends UmengNotification
             //"activity"   => "xx",
             //custom       => "xx"
 
-            "extra"       => [],
-        ]
-
+            'extra' => [],
+        ],
     ];
-
 
     // Keys can be set in the payload level
     protected $PAYLOAD_KEYS = array('display_type');
