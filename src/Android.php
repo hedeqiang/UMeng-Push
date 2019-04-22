@@ -22,6 +22,8 @@ use Hedeqiang\UMeng\notification\android\AndroidUnicast;
  */
 class Android
 {
+    private $nameSpace = "Hedeqiang\\UMeng\\notification\\android\\";
+
     protected $appkey = null;
 
     protected $appMasterSecret = null;
@@ -32,6 +34,16 @@ class Android
 
     protected $production_mode = false;
 
+    private $fileContent = null;
+
+    private $os;
+
+    private $extra = [];
+
+
+
+    private $params = [];
+
     public function __construct($key, $secret, $production_mode)
     {
         $this->appkey = $key;
@@ -39,6 +51,129 @@ class Android
         $this->timestamp = strval(time());
         $this->production_mode = $production_mode;
     }
+
+
+
+    /**
+     * 
+     * @param $ticker
+     * @return $this
+     */
+    public function setAndroidTicker($ticker)
+    {
+        $this->params['ticker'] = $ticker;
+        return $this;
+    }
+
+    /**
+     * @param $title
+     * @return $this
+     */
+    public function setAndroidTitle($title)
+    {
+        $this->params['title'] = $title;
+        return $this;
+    }
+
+    /**
+     * @param $text
+     * @return $this
+     */
+    public function setAndroidText($text)
+    {
+        $this->params['text'] = $text;
+        return $this;
+    }
+
+    /**
+     * @param string $afterOpen
+     * @return $this
+     */
+    public function setAndroidAfterOpen($afterOpen = 'go_app')
+    {
+        $this->params['after_open'] = $afterOpen;
+        return $this;
+    }
+
+    /**
+     * @param $tokens
+     * @return $this
+     */
+    public function setDeviceTokens($tokens)
+    {
+        $this->params['device_tokens'] = $tokens;
+        return $this;
+    }
+
+    /**
+     * @param array $filter
+     * @return $this
+     */
+    public function setFilter(array $filter)
+    {
+        $this->params['filter'] = $filter;
+        return $this;
+    }
+
+    /**
+     * @param $alias
+     * @return $this
+     */
+    public function setAlias($alias)
+    {
+        $this->params['alias'] = $alias;
+        return $this;
+    }
+
+    /**
+     * @param $aliasType
+     * @return $this
+     */
+    public function setAliasType($aliasType)
+    {
+        $this->params['alias_type'] = $aliasType;
+        return $this;
+    }
+
+    private function getCastObj($className)
+    {
+        $className = $this->nameSpace  . "{$className}";
+        $obj = new $className();
+        $obj->setAppMasterSecret($this->appMasterSecret);
+        $obj->setPredefinedKeyValue("appkey", $this->appkey);
+        $obj->setPredefinedKeyValue("timestamp", $this->timestamp);
+
+        $obj->setPredefinedKeyValue("production_mode",  $this->production_mode);
+        return $obj;
+    }
+
+    private function sendCast($className, array $params = [], array $extra = [], $file = null)
+    {
+        try {
+            $brocast = $this->getCastObj($className);
+            $params = array_merge($this->params, $params);
+
+            foreach ($params as $key => $val) {
+                $brocast->setPredefinedKeyValue($key, $val);
+            }
+
+            $ext = array_merge($this->extra, $extra);
+
+            // [optional]Set extra fields
+            if (count($ext)) {
+                $func = 'setExtraField';
+                foreach ($ext as $key => $val) {
+                    $brocast->{$func}($key, $val);
+                }
+            }
+
+            $file || ($file = $this->fileContent);
+            $file && $brocast->uploadContents($file);
+            return $brocast->send();
+        } catch (Exception $e) { }
+    }
+
+
 
     public function sendAndroidBroadcast($ticker, $title, $text, $after_open = 'go_app', $url = '')
     {
@@ -112,7 +247,7 @@ class Android
             }
             //print("Uploading file contents, please wait...\r\n");
             // Upload your device tokens, and use '\n' to split them if there are multiple tokens
-            $filecast->uploadContents('aa'."\n".'bb');
+            $filecast->uploadContents('aa' . "\n" . 'bb');
             //print("Sending filecast notification, please wait...\r\n");
             return $filecast->send();
             //print("Sent SUCCESS\r\n");
@@ -136,12 +271,12 @@ class Android
               *	}
               */
             $filter = array(
-                            'where' => array(
-                                            'and' => array(
-                                                            $tag,
-                                                         ),
-                                        ),
-                        );
+                'where' => array(
+                    'and' => array(
+                        $tag,
+                    ),
+                ),
+            );
 
             $groupcast = new AndroidGroupcast();
             $groupcast->setAppMasterSecret($this->appMasterSecret);
@@ -167,32 +302,9 @@ class Android
         }
     }
 
-    public function sendAndroidCustomizedcast($alias, $alias_type = 'APP', $ticker, $title, $text, $after_open = 'go_app', $url = '')
+    public function sendAndroidCustomizedcast(array $params = [], array $extra = [])
     {
-        try {
-            $customizedcast = new AndroidCustomizedcast();
-            $customizedcast->setAppMasterSecret($this->appMasterSecret);
-            $customizedcast->setPredefinedKeyValue('appkey', $this->appkey);
-            $customizedcast->setPredefinedKeyValue('timestamp', $this->timestamp);
-            // Set your alias here, and use comma to split them if there are multiple alias.
-            // And if you have many alias, you can also upload a file containing these alias, then
-            // use file_id to send customized notification.
-            $customizedcast->setPredefinedKeyValue('alias', $alias);
-            // Set your alias_type here
-            $customizedcast->setPredefinedKeyValue('alias_type', $alias_type);
-            $customizedcast->setPredefinedKeyValue('ticker', $ticker);
-            $customizedcast->setPredefinedKeyValue('title', $title);
-            $customizedcast->setPredefinedKeyValue('text', $text);
-            $customizedcast->setPredefinedKeyValue('after_open', $after_open);
-            if ('go_url' == $after_open) {
-                $customizedcast->setPredefinedKeyValue('url', $url);
-            }
-            //print("Sending customizedcast notification, please wait...\r\n");
-            return $customizedcast->send();
-            //print("Sent SUCCESS\r\n");
-        } catch (\Exception $e) {
-            throw new \Exception($e->getMessage(), $e->getCode(), $e);
-        }
+        return $this->sendCast('AndroidCustomizedcast', $params, $extra);
     }
 
     public function sendAndroidCustomizedcastFileId($content, $alias_type, $ticker, $title, $text, $after_open = 'go_app', $url = '')
