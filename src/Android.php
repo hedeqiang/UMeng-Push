@@ -22,7 +22,7 @@ use Hedeqiang\UMeng\notification\android\AndroidUnicast;
  */
 class Android
 {
-    private $nameSpace = "Hedeqiang\\UMeng\\notification\\android\\";
+    private $nameSpace = 'Hedeqiang\\UMeng\\notification\\android\\';
 
     protected $appkey = null;
 
@@ -40,8 +40,6 @@ class Android
 
     private $extra = [];
 
-
-
     private $params = [];
 
     public function __construct($key, $secret, $production_mode)
@@ -52,98 +50,112 @@ class Android
         $this->production_mode = $production_mode;
     }
 
-
-
     /**
-     * 
      * @param $ticker
+     *
      * @return $this
      */
     public function setAndroidTicker($ticker)
     {
         $this->params['ticker'] = $ticker;
+
         return $this;
     }
 
     /**
      * @param $title
+     *
      * @return $this
      */
     public function setAndroidTitle($title)
     {
         $this->params['title'] = $title;
+
         return $this;
     }
 
     /**
      * @param $text
+     *
      * @return $this
      */
     public function setAndroidText($text)
     {
         $this->params['text'] = $text;
+
         return $this;
     }
 
     /**
      * @param string $afterOpen
+     *
      * @return $this
      */
     public function setAndroidAfterOpen($afterOpen = 'go_app')
     {
         $this->params['after_open'] = $afterOpen;
+
         return $this;
     }
 
     /**
      * @param $tokens
+     *
      * @return $this
      */
     public function setDeviceTokens($tokens)
     {
         $this->params['device_tokens'] = $tokens;
+
         return $this;
     }
 
     /**
      * @param array $filter
+     *
      * @return $this
      */
     public function setFilter(array $filter)
     {
         $this->params['filter'] = $filter;
+
         return $this;
     }
 
     /**
      * @param $alias
+     *
      * @return $this
      */
     public function setAlias($alias)
     {
         $this->params['alias'] = $alias;
+
         return $this;
     }
 
     /**
      * @param $aliasType
+     *
      * @return $this
      */
     public function setAliasType($aliasType)
     {
         $this->params['alias_type'] = $aliasType;
+
         return $this;
     }
 
     private function getCastObj($className)
     {
-        $className = $this->nameSpace  . "{$className}";
+        $className = $this->nameSpace."{$className}";
         $obj = new $className();
         $obj->setAppMasterSecret($this->appMasterSecret);
-        $obj->setPredefinedKeyValue("appkey", $this->appkey);
-        $obj->setPredefinedKeyValue("timestamp", $this->timestamp);
+        $obj->setPredefinedKeyValue('appkey', $this->appkey);
+        $obj->setPredefinedKeyValue('timestamp', $this->timestamp);
 
-        $obj->setPredefinedKeyValue("production_mode",  $this->production_mode);
+        $obj->setPredefinedKeyValue('production_mode', $this->production_mode);
+
         return $obj;
     }
 
@@ -169,11 +181,11 @@ class Android
 
             $file || ($file = $this->fileContent);
             $file && $brocast->uploadContents($file);
+
             return $brocast->send();
-        } catch (Exception $e) { }
+        } catch (Exception $e) {
+        }
     }
-
-
 
     public function sendAndroidBroadcast($ticker, $title, $text, $after_open = 'go_app', $url = '')
     {
@@ -247,7 +259,7 @@ class Android
             }
             //print("Uploading file contents, please wait...\r\n");
             // Upload your device tokens, and use '\n' to split them if there are multiple tokens
-            $filecast->uploadContents('aa' . "\n" . 'bb');
+            $filecast->uploadContents('aa'."\n".'bb');
             //print("Sending filecast notification, please wait...\r\n");
             return $filecast->send();
             //print("Sent SUCCESS\r\n");
