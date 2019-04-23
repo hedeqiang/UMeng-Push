@@ -43,7 +43,9 @@ class IOS
     /**
      * @param array $params
      * @param array $customized
+     *
      * @return mixed
+     *
      * @throws \Exception
      */
     public function sendIOSBroadcast(array $params = [], array $customized = [])
@@ -64,6 +66,7 @@ class IOS
                     $brocast->setCustomizedField($key, $val);
                 }
             }
+
             return $brocast->send();
         } catch (\Exception $e) {
             throw new \Exception($e->getMessage(), $e->getCode(), $e);
@@ -73,7 +76,9 @@ class IOS
     /**
      * @param array $params
      * @param array $customized
+     *
      * @return mixed
+     *
      * @throws \Exception
      */
     public function sendIOSUnicast(array $params = [], array $customized = [])
@@ -94,6 +99,7 @@ class IOS
                     $unicast->setCustomizedField($key, $val);
                 }
             }
+
             return $unicast->send();
             //print("Sent SUCCESS\r\n");
         } catch (\Exception $e) {
@@ -103,8 +109,10 @@ class IOS
 
     /**
      * @param array $params
-     * @param null $content
+     * @param null  $content
+     *
      * @return mixed
+     *
      * @throws \Exception
      */
     public function sendIOSFilecast(array $params = [], $content = null)
@@ -134,7 +142,9 @@ class IOS
     /**
      * @param array $filter
      * @param array $params
+     *
      * @return mixed
+     *
      * @throws \Exception
      */
     public function sendIOSGroupcast(array $filter = [], array $params = [])
@@ -163,6 +173,7 @@ class IOS
             foreach ($params as $key => $val) {
                 $groupcast->setPredefinedKeyValue($key, $val);
             }
+
             return $groupcast->send();
         } catch (\Exception $e) {
             throw new \Exception($e->getMessage(), $e->getCode(), $e);
@@ -171,7 +182,9 @@ class IOS
 
     /**
      * @param array $params
+     *
      * @return mixed
+     *
      * @throws \Exception
      */
     public function sendIOSCustomizedcast(array $params = [])

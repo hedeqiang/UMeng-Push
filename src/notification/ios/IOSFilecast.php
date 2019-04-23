@@ -41,10 +41,10 @@ class IOSFilecast extends IOSNotification
             'timestamp' => $this->data['timestamp'],
             'content' => $content,
         );
-        $url = $this->host . $this->uploadPath;
+        $url = $this->host.$this->uploadPath;
         $postBody = json_encode($post);
-        $sign = md5('POST' . $url . $postBody . $this->appMasterSecret);
-        $url = $url . '?sign=' . $sign;
+        $sign = md5('POST'.$url.$postBody.$this->appMasterSecret);
+        $url = $url.'?sign='.$sign;
 
         try {
             $client = new Client();
