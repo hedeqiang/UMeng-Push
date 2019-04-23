@@ -1,7 +1,7 @@
 <h1 align="center"> umeng </h1>
 
 <p align="center"> 友盟推送SDK</p>
-
+![StyleCI build status](https://github.styleci.io/repos/160544563/shield) 
 
 ## Installing
 
