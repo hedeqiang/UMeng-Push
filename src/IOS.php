@@ -40,46 +40,60 @@ class IOS
         $this->production_mode = $production_mode;
     }
 
-    public function sendIOSBroadcast($alert)
+    /**
+     * @param array $params
+     * @param array $customized
+     * @return mixed
+     * @throws \Exception
+     */
+    public function sendIOSBroadcast(array $params = [], array $customized = [])
     {
         try {
             $brocast = new IOSBroadcast();
             $brocast->setAppMasterSecret($this->appMasterSecret);
             $brocast->setPredefinedKeyValue('appkey', $this->appkey);
             $brocast->setPredefinedKeyValue('timestamp', $this->timestamp);
-
-            $brocast->setPredefinedKeyValue('alert', $alert);
-            $brocast->setPredefinedKeyValue('badge', 0);
-            $brocast->setPredefinedKeyValue('sound', 'chime');
             // Set 'production_mode' to 'true' if your app is under production mode
             $brocast->setPredefinedKeyValue('production_mode', $this->production_mode);
-            // Set customized fields
-            $brocast->setCustomizedField('test', 'helloworld');
-            //print("Sending broadcast notification, please wait...\r\n");
+
+            foreach ($params as $key => $val) {
+                $brocast->setPredefinedKeyValue($key, $val);
+            }
+            if (count($customized)) {
+                foreach ($customized as $key => $val) {
+                    $brocast->setCustomizedField($key, $val);
+                }
+            }
             return $brocast->send();
-            //print("Sent SUCCESS\r\n");
         } catch (\Exception $e) {
             throw new \Exception($e->getMessage(), $e->getCode(), $e);
         }
     }
 
-    public function sendIOSUnicast($device_tokens, $alert)
+    /**
+     * @param array $params
+     * @param array $customized
+     * @return mixed
+     * @throws \Exception
+     */
+    public function sendIOSUnicast(array $params = [], array $customized = [])
     {
         try {
             $unicast = new IOSUnicast();
             $unicast->setAppMasterSecret($this->appMasterSecret);
             $unicast->setPredefinedKeyValue('appkey', $this->appkey);
             $unicast->setPredefinedKeyValue('timestamp', $this->timestamp);
-            // Set your device tokens here
-            $unicast->setPredefinedKeyValue('device_tokens', $device_tokens);
-            $unicast->setPredefinedKeyValue('alert', $alert);
-            $unicast->setPredefinedKeyValue('badge', 0);
-            $unicast->setPredefinedKeyValue('sound', 'chime');
             // Set 'production_mode' to 'true' if your app is under production mode
             $unicast->setPredefinedKeyValue('production_mode', $this->production_mode);
-            // Set customized fields
-            $unicast->setCustomizedField('test', 'helloworld');
-            //print("Sending unicast notification, please wait...\r\n");
+
+            foreach ($params as $key => $val) {
+                $unicast->setPredefinedKeyValue($key, $val);
+            }
+            if (count($customized)) {
+                foreach ($customized as $key => $val) {
+                    $unicast->setCustomizedField($key, $val);
+                }
+            }
             return $unicast->send();
             //print("Sent SUCCESS\r\n");
         } catch (\Exception $e) {
@@ -87,23 +101,28 @@ class IOS
         }
     }
 
-    public function sendIOSFilecast($alert)
+    /**
+     * @param array $params
+     * @param null $content
+     * @return mixed
+     * @throws \Exception
+     */
+    public function sendIOSFilecast(array $params = [], $content = null)
     {
         try {
             $filecast = new IOSFilecast();
             $filecast->setAppMasterSecret($this->appMasterSecret);
             $filecast->setPredefinedKeyValue('appkey', $this->appkey);
             $filecast->setPredefinedKeyValue('timestamp', $this->timestamp);
-
-            $filecast->setPredefinedKeyValue('alert', $alert);
-            $filecast->setPredefinedKeyValue('badge', 0);
-            $filecast->setPredefinedKeyValue('sound', 'chime');
             // Set 'production_mode' to 'true' if your app is under production mode
             $filecast->setPredefinedKeyValue('production_mode', $this->production_mode);
-            //print("Uploading file contents, please wait...\r\n");
+
+            foreach ($params as $key => $val) {
+                $filecast->setPredefinedKeyValue($key, $val);
+            }
+
             // Upload your device tokens, and use '\n' to split them if there are multiple tokens
-            $filecast->uploadContents('aa'."\n".'bb');
-            echo "Sending filecast notification, please wait...\r\n";
+            $filecast->uploadContents($content);
 
             return $filecast->send();
             //print("Sent SUCCESS\r\n");
@@ -112,7 +131,13 @@ class IOS
         }
     }
 
-    public function sendIOSGroupcast($tag, $alert)
+    /**
+     * @param array $filter
+     * @param array $params
+     * @return mixed
+     * @throws \Exception
+     */
+    public function sendIOSGroupcast(array $filter = [], array $params = [])
     {
         try {
             /*
@@ -125,74 +150,47 @@ class IOS
               *		]
               *	}
               */
-            $filter = array(
-                            'where' => array(
-                                            'and' => array(
-                                                            array(
-                                                                 'tag' => $tag,
-                                                            ),
-                                                         ),
-                                        ),
-                        );
 
             $groupcast = new IOSGroupcast();
             $groupcast->setAppMasterSecret($this->appMasterSecret);
             $groupcast->setPredefinedKeyValue('appkey', $this->appkey);
             $groupcast->setPredefinedKeyValue('timestamp', $this->timestamp);
-            // Set the filter condition
-            $groupcast->setPredefinedKeyValue('filter', $filter);
-            $groupcast->setPredefinedKeyValue('alert', $alert);
-            $groupcast->setPredefinedKeyValue('badge', 0);
-            $groupcast->setPredefinedKeyValue('sound', 'chime');
             // Set 'production_mode' to 'true' if your app is under production mode
             $groupcast->setPredefinedKeyValue('production_mode', $this->production_mode);
-            //print("Sending groupcast notification, please wait...\r\n");
+            // Set the filter condition
+            $groupcast->setPredefinedKeyValue('filter', $filter);
+
+            foreach ($params as $key => $val) {
+                $groupcast->setPredefinedKeyValue($key, $val);
+            }
             return $groupcast->send();
-            //print("Sent SUCCESS\r\n");
         } catch (\Exception $e) {
             throw new \Exception($e->getMessage(), $e->getCode(), $e);
         }
     }
 
     /**
-     * @param $alias
-     * @param $alias_type
-     * @param $alert
-     * @param $content
-     *
+     * @param array $params
      * @return mixed
-     *
-     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws \Exception
      */
-    public function sendIOSCustomizedcast($alias, $alias_type, $alert, $content)
+    public function sendIOSCustomizedcast(array $params = [])
     {
-        $data = [];
-
         try {
             $customizedcast = new IOSCustomizedcast();
             $customizedcast->setAppMasterSecret($this->appMasterSecret);
             $customizedcast->setPredefinedKeyValue('appkey', $this->appkey);
             $customizedcast->setPredefinedKeyValue('timestamp', $this->timestamp);
-
+            // Set 'production_mode' to 'true' if your app is under production mode
+            $customizedcast->setPredefinedKeyValue('production_mode', $this->production_mode);
             // Set your alias here, and use comma to split them if there are multiple alias.
             // And if you have many alias, you can also upload a file containing these alias, then
             // use file_id to send customized notification.
-            $customizedcast->setPredefinedKeyValue('alias', $alias);
-            // Set your alias_type here
-            $customizedcast->setPredefinedKeyValue('alias_type', $alias_type);
-            $customizedcast->setPredefinedKeyValue('alert', $alert);
-            //$customizedcast->setPredefinedKeyValue("title", $alert);
-            $customizedcast->setPredefinedKeyValue('description', $content);
-            //$customizedcast->setPredefinedKeyValue("body", '123456');
-            $customizedcast->setPredefinedKeyValue('content-available', '1');
-            //$customizedcast->setPredefinedKeyValue("subtitle", $alert);
-            $customizedcast->setPredefinedKeyValue('badge', 5);
-            $customizedcast->setPredefinedKeyValue('sound', 'chime');
-            // Set 'production_mode' to 'true' if your app is under production mode
-            $customizedcast->setPredefinedKeyValue('production_mode', $this->production_mode);
-            //print("Sending customizedcast notification, please wait...\r\n");
+            foreach ($params as $key => $val) {
+                $customizedcast->setPredefinedKeyValue($key, $val);
+            }
+
             return $customizedcast->send();
-            //print("Sent SUCCESS\r\n");
         } catch (\Exception $e) {
             throw new \Exception($e->getMessage(), $e->getCode(), $e);
         }

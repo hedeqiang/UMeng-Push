@@ -17,20 +17,20 @@ abstract class AndroidNotification extends UmengNotification
     protected $androidPayload = [
         'display_type' => 'notification',
         'body' => [
-            'ticker' => null,
-            'title' => null,
-            'text' => null,
-            'icon' => '',
-            'largeIcon' => '',
-            'play_vibrate' => 'true',
-            'play_lights' => 'true',
-            'play_sound' => 'true',
-            'after_open' => null,
-            'url' => '',
-            'activity' => '',
-            'custom' => '',
+            "ticker"       =>   NULL,
+            "title"        => NULL,
+            "text"         => NULL,
+            //"icon"       => "xx", 
+            //largeIcon    => "xx",
+            "play_vibrate" => "true",
+            "play_lights"  => "true",
+            "play_sound"   => "true",
+            "after_open"   => NULL,
+            //"url"        => "xx",
+            //"activity"   => "xx",
+            //custom       => "xx"
 
-            'extra' => [],
+            //'extra' => [],
         ],
     ];
 
