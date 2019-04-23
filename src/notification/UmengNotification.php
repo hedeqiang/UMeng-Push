@@ -56,7 +56,8 @@ abstract class UmengNotification
     protected $POLICY_KEYS = ['start_time', 'expire_time', 'max_send_num'];
 
     public function __construct()
-    { }
+    {
+    }
 
     public function setAppMasterSecret($secret)
     {
@@ -78,7 +79,7 @@ abstract class UmengNotification
     {
         foreach ($arr as $key => $value) {
             if (is_null($value)) {
-                throw new \Exception($key . ' is NULL!');
+                throw new \Exception($key.' is NULL!');
             } elseif (is_array($value)) {
                 $this->checkArrayValues($value);
             }
@@ -101,19 +102,19 @@ abstract class UmengNotification
         //check the fields to make sure that they are not NULL
         $this->isComplete();
 
-        $url = $this->host . $this->postPath;
+        $url = $this->host.$this->postPath;
         $postBody = json_encode($this->data);
-        $sign = md5('POST' . $url . $postBody . $this->appMasterSecret);
-        $url = $url . '?sign=' . $sign;
+        $sign = md5('POST'.$url.$postBody.$this->appMasterSecret);
+        $url = $url.'?sign='.$sign;
 
         try {
             $client = new Client();
             $response = $client->request('POST', $url, [
                 'body' => $postBody,
             ]);
+
             return \json_decode($response->getBody()->getContents(), true);
         } catch (\Exception $e) {
-
             throw new HttpException($e->getMessage(), $e->getCode(), $e);
         }
     }

@@ -43,7 +43,9 @@ class Android
     /**
      * @param array $params
      * @param array $extra
+     *
      * @return mixed
+     *
      * @throws \Exception
      */
     public function sendAndroidBroadcast(array $params = [], array $extra = [])
@@ -73,7 +75,9 @@ class Android
     /**
      * @param array $params
      * @param array $extra
+     *
      * @return mixed
+     *
      * @throws \Exception
      */
     public function sendAndroidUnicast(array $params = [], array $extra = [])
@@ -103,8 +107,10 @@ class Android
 
     /**
      * @param array $params
-     * @param null $content
+     * @param null  $content
+     *
      * @return mixed
+     *
      * @throws \Exception
      */
     public function sendAndroidFilecast(array $params = [], $content = null)
@@ -132,24 +138,26 @@ class Android
     /**
      * @param array $filter
      * @param array $params
+     *
      * @return mixed
+     *
      * @throws \Exception
      */
     public function sendAndroidGroupcast(array $filter = [], array $params = [])
     {
         try {
-
             $groupcast = new AndroidGroupcast();
             $groupcast->setAppMasterSecret($this->appMasterSecret);
             $groupcast->setPredefinedKeyValue('appkey', $this->appkey);
             $groupcast->setPredefinedKeyValue('timestamp', $this->timestamp);
             $groupcast->setPredefinedKeyValue('production_mode', $this->production_mode);
 
-            $groupcast->setPredefinedKeyValue("filter", $filter);
+            $groupcast->setPredefinedKeyValue('filter', $filter);
 
             foreach ($params as $key => $val) {
                 $groupcast->setPredefinedKeyValue($key, $val);
             }
+
             return $groupcast->send();
         } catch (\Exception $e) {
             throw new \Exception($e->getMessage(), $e->getCode(), $e);
@@ -158,7 +166,9 @@ class Android
 
     /**
      * @param array $params
+     *
      * @return mixed
+     *
      * @throws \Exception
      */
     public function sendAndroidCustomizedcast(array $params = [])
@@ -182,8 +192,10 @@ class Android
 
     /**
      * @param array $params
-     * @param null $content
+     * @param null  $content
+     *
      * @return mixed
+     *
      * @throws \Exception
      */
     public function sendAndroidCustomizedcastFileId(array $params = [], $content = null)
