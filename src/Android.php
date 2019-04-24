@@ -32,12 +32,18 @@ class Android
 
     protected $production_mode = false;
 
-    public function __construct($key, $secret, $production_mode)
+    public function __construct(array $config = [])
     {
-        $this->appkey = $key;
-        $this->appMasterSecret = $secret;
-        $this->timestamp = strval(time());
-        $this->production_mode = $production_mode;
+        foreach ($config as $key => $val) {
+            if ('appKey' == $key) {
+                $this->appkey = $val;
+            } else if ('appMasterSecret' == $key) {
+                $this->appMasterSecret = $val;
+            } else {
+                $this->timestamp = strval(time());
+                $this->production_mode = $val;
+            }
+        }
     }
 
     /**
