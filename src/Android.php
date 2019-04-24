@@ -37,7 +37,7 @@ class Android
         foreach ($config as $key => $val) {
             if ('appKey' == $key) {
                 $this->appkey = $val;
-            } else if ('appMasterSecret' == $key) {
+            } elseif ('appMasterSecret' == $key) {
                 $this->appMasterSecret = $val;
             } else {
                 $this->timestamp = strval(time());
