@@ -20,18 +20,22 @@ require __DIR__ .'/vendor/autoload.php';
 use Hedeqiang\UMeng\Android;
 use Hedeqiang\UMeng\IOS;
 
-//安卓 友盟 KEY
-$android_AppKey = '5b1df163f29d98*****';
-$android_Message_Secret = '19077a28fb4c1ef3*****';
-$android_Master_Secret = 'i7tzdarswtrjw2yok*******';
+// Android 
+$config = [
+    'appKey' => '5b1df1**************',
+    'appMasterSecret' => 'i7tzdarsw************',
+    'debug' => false,
+];
+// IOS 
+$ios_config = [
+    'appKey' => '5b1df0d1************',
+    'appMasterSecret' => 'fa9ry9kd*********',
+    'debug' => false,
+]
 
-//IOS 友盟 KEY and secret
-$ios_AppKey = '5b1df0d1f29d**********';
-$ios_Master_Secret = 'fa9ry9kdk8na9pfqsk***********';
+$android = new Android($config));
 
-$android = new Android($android_AppKey, $android_Master_Secret, false);
-
-$ios = new IOS($ios_AppKey, $ios_Master_Secret, false);
+$ios = new IOS($ios_config);
 ```
 ## Android
 ### customizedcast消息发送示例
