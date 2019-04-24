@@ -32,13 +32,12 @@ class IOS
 
     protected $production_mode = false;
 
-
     public function __construct(array $config = [])
     {
         foreach ($config as $key => $val) {
             if ('appKey' == $key) {
                 $this->appkey = $val;
-            } else if ('appMasterSecret' == $key) {
+            } elseif ('appMasterSecret' == $key) {
                 $this->appMasterSecret = $val;
             } else {
                 $this->timestamp = strval(time());
