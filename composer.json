@@ -1,5 +1,12 @@
 {
     "name": "hedeqiang\/umeng",
+    "keywords": [
+        "umeng",
+        "友盟",
+        "U-Push",
+        "SDK",
+        "PHP"
+    ],
     "description": "友盟推送",
     "license": "MIT",
     "authors": [
@@ -9,9 +16,7 @@
         }
     ],
     "require": {
-        "guzzlehttp/guzzle": "^6.3",
-        "mockery/mockery": "^1.2",
-        "phpunit/phpunit": "~5"
+        "guzzlehttp/guzzle": "^6.3"
     },
     "autoload": {
         "psr-4": {
