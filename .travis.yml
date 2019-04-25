@@ -13,4 +13,4 @@ sudo: false  # 使用使用 sudo 模式
 install: travis_retry composer install --no-interaction --prefer-source
 
 # 主要构建命令
-script: vendor/bin/phpunit --verbose
+# script: vendor/bin/phpunit --verbose
