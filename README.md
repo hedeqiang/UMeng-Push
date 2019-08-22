@@ -231,6 +231,10 @@ $response = $ios->sendIOSCustomizedcast($params);
 ## 参考
 * [U-Push API 集成文档](https://developer.umeng.com/docs/66632/detail/68343)
 
+
+## 工具
+![JetBrains](https://upyun.laravelcode.cn/upload/JetBrains/jetbrains-training-partner.png)
+
 ## License
 
 MIT
