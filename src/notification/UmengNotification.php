@@ -53,7 +53,7 @@ abstract class UmengNotification
         'feedback', 'description', 'thirdparty_id',
     ];
 
-    protected $POLICY_KEYS = ['start_time', 'expire_time', 'max_send_num'];
+    protected $POLICY_KEYS = ['start_time', 'expire_time', 'max_send_num', 'out_biz_no'];
 
     public function __construct()
     {

@@ -39,8 +39,13 @@ abstract class AndroidNotification extends UmengNotification
 
     // Keys can be set in the body level
     protected $BODY_KEYS = [
-        'ticker', 'title', 'text', 'builder_id', 'icon', 'largeIcon', 'img', 'play_vibrate', 'play_lights', 'play_sound', 'after_open', 'url',
+        'ticker', 'title', 'text', 'builder_id', 'icon', 'largeIcon', 'img', 'sound', 'play_vibrate', 'play_lights', 'play_sound', 'after_open', 'url',
         'activity', 'custom',
+    ];
+
+    // Keys can be set in the minpush, mi_activity
+    protected $MIPUSH_KEYS = [
+        'minpush', 'mi_activity'
     ];
 
     public function __construct()
@@ -75,6 +80,8 @@ abstract class AndroidNotification extends UmengNotification
             }
         } elseif (in_array($key, $this->POLICY_KEYS)) {
             $this->data['policy'][$key] = $value;
+        } elseif (in_array($key, $this->MIPUSH_KEYS)) {
+            $this->data[$key] = $value;
         } else {
             if ('payload' == $key || 'body' == $key || 'policy' == $key || 'extra' == $key) {
                 throw new \Exception("You don't need to set value for ${key} , just set values for the sub keys in it.");
