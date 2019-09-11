@@ -45,7 +45,7 @@ abstract class AndroidNotification extends UmengNotification
 
     // Keys can be set in the minpush, mi_activity
     protected $MIPUSH_KEYS = [
-        'minpush', 'mi_activity'
+        'mipush', 'mi_activity'
     ];
 
     public function __construct()
