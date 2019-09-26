@@ -43,11 +43,6 @@ abstract class AndroidNotification extends UmengNotification
         'activity', 'custom',
     ];
 
-    // Keys can be set in the minpush, mi_activity
-    protected $MIPUSH_KEYS = [
-        'mipush', 'mi_activity'
-    ];
-
     public function __construct()
     {
         parent::__construct();
@@ -80,8 +75,6 @@ abstract class AndroidNotification extends UmengNotification
             }
         } elseif (in_array($key, $this->POLICY_KEYS)) {
             $this->data['policy'][$key] = $value;
-        } elseif (in_array($key, $this->MIPUSH_KEYS)) {
-            $this->data[$key] = $value;
         } else {
             if ('payload' == $key || 'body' == $key || 'policy' == $key || 'extra' == $key) {
                 throw new \Exception("You don't need to set value for ${key} , just set values for the sub keys in it.");
