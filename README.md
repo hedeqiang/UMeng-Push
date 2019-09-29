@@ -27,13 +27,13 @@ use Hedeqiang\UMeng\IOS;
 $config = [
     'appKey' => '5b1df1**************',
     'appMasterSecret' => 'i7tzdarsw************',
-    'debug' => false,
+    'production_mode' => true,
 ];
 // IOS 
 $ios_config = [
     'appKey' => '5b1df0d1************',
     'appMasterSecret' => 'fa9ry9kd*********',
-    'debug' => false,
+    'production_mode' => true,
 ]
 
 $android = new Android($config));

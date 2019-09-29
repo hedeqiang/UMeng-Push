@@ -51,6 +51,8 @@ abstract class UmengNotification
     protected $DATA_KEYS = [
         'appkey', 'timestamp', 'type', 'device_tokens', 'alias', 'alias_type', 'file_id', 'filter', 'production_mode',
         'feedback', 'description', 'thirdparty_id',
+
+        'mipush', 'mi_activity',
     ];
 
     protected $POLICY_KEYS = ['start_time', 'expire_time', 'max_send_num', 'out_biz_no'];
