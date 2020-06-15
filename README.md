@@ -34,9 +34,9 @@ $ios_config = [
     'appKey' => '5b1df0d1************',
     'appMasterSecret' => 'fa9ry9kd*********',
     'production_mode' => true,
-]
+];
 
-$android = new Android($config));
+$android = new Android($config);
 
 $ios = new IOS($ios_config);
 ```
