@@ -215,10 +215,9 @@ class IOS
         }
     }
 
-
     /**
      * @param array $params
-     * @param null $content
+     * @param null  $content
      *
      * @return mixed
      *
@@ -248,5 +247,4 @@ class IOS
             throw new \Exception($e->getMessage(), $e->getCode(), $e);
         }
     }
-
 }
