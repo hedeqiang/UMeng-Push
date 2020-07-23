@@ -238,7 +238,7 @@ $params = [
         'body' => 'body',
     ],  //字符串或者JSON
     'alias_type' => 'APP',
-    "description" => "测试alias通知-iOS"
+    "description" => "测试Customized通知-iOS"
 ];
 
 $content = "aa" . "\n" . "bb";
