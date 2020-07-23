@@ -214,4 +214,39 @@ class IOS
             throw new \Exception($e->getMessage(), $e->getCode(), $e);
         }
     }
+
+
+    /**
+     * @param array $params
+     * @param null $content
+     *
+     * @return mixed
+     *
+     * @throws \Exception
+     */
+    public function sendIOSCustomizedcastFileId(array $params = [], $content = null)
+    {
+        try {
+            $customizedcast = new IOSCustomizedcast();
+            $customizedcast->setAppMasterSecret($this->appMasterSecret);
+            $customizedcast->setPredefinedKeyValue('appkey', $this->appkey);
+            $customizedcast->setPredefinedKeyValue('timestamp', $this->timestamp);
+            // Set 'production_mode' to 'true' if your app is under production mode
+            $customizedcast->setPredefinedKeyValue('production_mode', $this->production_mode);
+            // Set your alias here, and use comma to split them if there are multiple alias.
+            // And if you have many alias, you can also upload a file containing these alias, then
+            // use file_id to send customized notification.
+
+            $customizedcast->uploadContents($content);
+
+            foreach ($params as $key => $val) {
+                $customizedcast->setPredefinedKeyValue($key, $val);
+            }
+
+            return $customizedcast->send();
+        } catch (\Exception $e) {
+            throw new \Exception($e->getMessage(), $e->getCode(), $e);
+        }
+    }
+
 }

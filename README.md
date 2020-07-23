@@ -229,6 +229,24 @@ $params = [
 
 $response = $ios->sendIOSCustomizedcast($params);
 ```
+
+### sendIOSCustomizedcastFileId消息发送示例
+```
+$params = [
+    'alert' => [
+        'title' => 'title',
+        'body' => 'body',
+    ],  //字符串或者JSON
+    'alias_type' => 'APP',
+    "description" => "测试alias通知-iOS"
+];
+
+$content = "aa" . "\n" . "bb";
+
+$response = $ios->sendIOSCustomizedcastFileId($params, $content);
+```
+
+
 ## 参考
 * [U-Push API 集成文档](https://developer.umeng.com/docs/66632/detail/68343)
 
