@@ -47,9 +47,6 @@ class Android
     }
 
     /**
-     * @param array $params
-     * @param array $extra
-     *
      * @return mixed
      *
      * @throws \Exception
@@ -79,9 +76,6 @@ class Android
     }
 
     /**
-     * @param array $params
-     * @param array $extra
-     *
      * @return mixed
      *
      * @throws \Exception
@@ -112,8 +106,7 @@ class Android
     }
 
     /**
-     * @param array $params
-     * @param null  $content
+     * @param null $content
      *
      * @return mixed
      *
@@ -142,9 +135,6 @@ class Android
     }
 
     /**
-     * @param array $filter
-     * @param array $params
-     *
      * @return mixed
      *
      * @throws \Exception
@@ -171,8 +161,6 @@ class Android
     }
 
     /**
-     * @param array $params
-     *
      * @return mixed
      *
      * @throws \Exception
@@ -197,8 +185,7 @@ class Android
     }
 
     /**
-     * @param array $params
-     * @param null  $content
+     * @param null $content
      *
      * @return mixed
      *

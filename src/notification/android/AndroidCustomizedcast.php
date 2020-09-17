@@ -45,11 +45,11 @@ class AndroidCustomizedcast extends AndroidNotification
         if (!is_string($content)) {
             throw new \Exception('content should be a string!');
         }
-        $post = array(
+        $post = [
             'appkey' => $this->data['appkey'],
             'timestamp' => $this->data['timestamp'],
             'content' => $content,
-        );
+        ];
         $url = $this->host.$this->uploadPath;
         $postBody = json_encode($post);
         $sign = md5('POST'.$url.$postBody.$this->appMasterSecret);

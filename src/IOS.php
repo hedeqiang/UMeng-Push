@@ -47,9 +47,6 @@ class IOS
     }
 
     /**
-     * @param array $params
-     * @param array $customized
-     *
      * @return mixed
      *
      * @throws \Exception
@@ -80,9 +77,6 @@ class IOS
     }
 
     /**
-     * @param array $params
-     * @param array $customized
-     *
      * @return mixed
      *
      * @throws \Exception
@@ -114,8 +108,7 @@ class IOS
     }
 
     /**
-     * @param array $params
-     * @param null  $content
+     * @param null $content
      *
      * @return mixed
      *
@@ -146,9 +139,6 @@ class IOS
     }
 
     /**
-     * @param array $filter
-     * @param array $params
-     *
      * @return mixed
      *
      * @throws \Exception
@@ -187,8 +177,6 @@ class IOS
     }
 
     /**
-     * @param array $params
-     *
      * @return mixed
      *
      * @throws \Exception
@@ -216,8 +204,7 @@ class IOS
     }
 
     /**
-     * @param array $params
-     * @param null  $content
+     * @param null $content
      *
      * @return mixed
      *
