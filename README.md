@@ -2,7 +2,7 @@
 
 <p align="center"> 友盟推送SDK</p>
 
-[![StyleCI build status](https://github.styleci.io/repos/160544563/shield) [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fhedeqiang%2FUMeng-Push.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fhedeqiang%2FUMeng-Push?ref=badge_shield)
+![StyleCI build status](https://github.styleci.io/repos/160544563/shield) [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fhedeqiang%2FUMeng-Push.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fhedeqiang%2FUMeng-Push?ref=badge_shield)
 [![996.icu](https://img.shields.io/badge/link-996.icu-red.svg)](https://996.icu)
 [![LICENSE](https://img.shields.io/badge/license-Anti%20996-blue.svg)](https://github.com/996icu/996.ICU/blob/master/LICENSE)
 [![HitCount](http://hits.dwyl.io/hedeqiang/umeng.svg)](http://hits.dwyl.io/hedeqiang/umeng)
