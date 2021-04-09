@@ -31,7 +31,7 @@ trait HasHttpRequest
     {
         return $this->request('get', $endpoint, [
             'headers' => $headers,
-            'query' => $query,
+            'query'   => $query,
         ]);
     }
 
@@ -46,7 +46,7 @@ trait HasHttpRequest
     protected function post(string $endpoint, $options, $headers = [])
     {
         return $this->request('post', $endpoint, [
-            'headers' => $headers,
+            'headers'   => $headers,
             'multipart' => $options,
         ]);
     }
@@ -64,7 +64,7 @@ trait HasHttpRequest
     {
         return $this->request('post', $endpoint, [
             'headers' => $headers,
-            'json' => $params,
+            'json'    => $params,
         ]);
     }
 
@@ -79,7 +79,7 @@ trait HasHttpRequest
     {
         return $this->request('delete', $endpoint, [
             'headers' => $headers,
-            'query' => $query,
+            'query'   => $query,
         ]);
     }
 
@@ -94,7 +94,7 @@ trait HasHttpRequest
     {
         return $this->request('put', $endpoint, [
             'headers' => $headers,
-            'json' => $params,
+            'json'    => $params,
         ]);
     }
 
@@ -119,7 +119,7 @@ trait HasHttpRequest
     {
         return [
             'base_uri' => method_exists($this, 'getBaseUri') ? $this->getBaseUri() : '',
-            'timeout' => method_exists($this, 'getTimeout') ? $this->getTimeout() : 10.0,
+            'timeout'  => method_exists($this, 'getTimeout') ? $this->getTimeout() : 10.0,
         ];
     }
 
