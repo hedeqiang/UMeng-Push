@@ -22,7 +22,7 @@ $ composer require hedeqiang/umeng -vvv
 ```php
 require __DIR__ .'/vendor/autoload.php';
 
-use Hedeqiang\UMeng\Push;
+use Hedeqiang\UMeng\Android;
 
 $config = [
     'deviceType' => 'Android',//Android、iOS、All

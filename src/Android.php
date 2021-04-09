@@ -13,7 +13,7 @@ namespace Hedeqiang\UMeng;
 
 use Hedeqiang\UMeng\Traits\HasHttpRequest;
 
-class Push
+class Android
 {
     use HasHttpRequest;
 
@@ -28,6 +28,10 @@ class Push
 
     protected $config;
 
+    /**
+     * Android constructor.
+     * @param array $config
+     */
     public function __construct(array $config)
     {
         $this->config = new Config($config);
@@ -35,6 +39,8 @@ class Push
 
     /**
      * 消息发送
+     * @param array $params
+     * @return array
      */
     public function send(array $params): array
     {
@@ -45,6 +51,8 @@ class Push
 
     /**
      * 任务类消息状态查询.
+     * @param array $params
+     * @return array
      */
     public function status(array $params): array
     {
@@ -55,6 +63,8 @@ class Push
 
     /**
      * 任务类消息取消.
+     * @param array $params
+     * @return array
      */
     public function cancel(array $params): array
     {
@@ -65,6 +75,8 @@ class Push
 
     /**
      * 文件上传.
+     * @param array $params
+     * @return array
      */
     public function upload(array $params): array
     {
@@ -74,7 +86,10 @@ class Push
     }
 
     /**
-     * Build endpoint url.
+     * 返回 代签名的 Url
+     * @param array $body
+     * @param string $type
+     * @return string
      */
     protected function buildEndpoint(array $body, string $type): string
     {
@@ -88,35 +103,47 @@ class Push
                 return $this->getSign(self::ENDPOINT_TEMPLATE_CANCEL, $body);
             case 'upload':
                 return $this->getSign(self::ENDPOINT_TEMPLATE_UPLOAD, $body);
+            default:
+                break;
         }
     }
 
     /**
+     * 生成签名
+     * @param string $endpoint
      * @param $body
+     * @return string
      */
     protected function getSign(string $endpoint, $body): string
     {
         switch ($this->config->get('deviceType')) {
             case 'Android':
-                $sign = md5('POST'.$endpoint.$body.$this->config->get('Android.appMasterSecret'));
-
-                return $endpoint.'?sign='.$sign;
+                $sign = md5('POST' . $endpoint . $body . $this->config->get('Android.appMasterSecret'));
+                break;
             case 'iOS':
-                $sign = md5('POST'.$endpoint.$body.$this->config->get('iOS.appMasterSecret'));
-
-                return $endpoint.'?sign='.$sign;
-//            case 'All':
-//                $android_sign = md5('POST' . $endpoint . $body . $this->config->get('Android.appMasterSecret'));
-//                $ios_sign = md5('POST' . $endpoint . $body . $this->config->get('iOS.appMasterSecret'));
-//                return $endpoint . '?sign=' . $android_sign;
+                $sign = md5('POST' . $endpoint . $body . $this->config->get('iOS.appMasterSecret'));
+                break;
+            default:
+                break;
         }
+        return $endpoint . '?sign=' . $sign;
     }
 
     /**
      * 获取 URL 和参数.
+     * @param array $params
+     * @param string $type
+     * @return array
      */
     protected function getUrl(array $params, string $type): array
     {
+        if (!array_key_exists('timestamp', $params)) {
+            $params['timestamp'] = time();
+        }
+        if (!array_key_exists('production_mode', $params)) {
+            $params['production_mode'] = true;
+        }
+
         if (!array_key_exists('appKey', $params)) {
             switch ($this->config->get('deviceType')) {
                 case 'Android':
@@ -125,18 +152,17 @@ class Push
                 case 'iOS':
                     $params['appkey'] = $this->config->get('iOS.appKey');
                     break;
+                default:
+                    break;
             }
         }
-
-        if (!array_key_exists('timestamp', $params)) {
-            $params['timestamp'] = time();
-        }
-
         return [$this->buildEndpoint($params, $type), $params];
     }
 
     /**
+     * @param string $url
      * @param $params
+     * @return array
      */
     protected function curl(string $url, $params): array
     {
@@ -149,6 +175,6 @@ class Push
             return json_decode($responseBodyAsString, true);
         }
 
-        return json_decode((string) $response, true);
+        return json_decode((string)$response, true);
     }
 }
