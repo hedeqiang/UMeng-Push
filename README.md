@@ -23,9 +23,9 @@ $ composer require hedeqiang/umeng -vvv
 require __DIR__ .'/vendor/autoload.php';
 
 use Hedeqiang\UMeng\Android;
+use Hedeqiang\UMeng\IOS;
 
 $config = [
-    'deviceType' => 'Android',//Android、iOS、All
     'Android' => [
         'appKey' => '***********',
         'appMasterSecret' => '***********',
@@ -35,16 +35,83 @@ $config = [
         'appKey' => '***********',
         'appMasterSecret' => '***********',
         'production_mode' => true,
+    ]
 ];
+
+$android = new Android($config);
+$ios = new IOS($config);
 ```
+
+> params 接受数组，安装官方文档实列代码，转化为数组格式即可 `appkey`` 和 `timestamp` 可传可不传。以下为示例代码。可供参考
+
+
 ## 消息发送
+### unicast消息发送示例
+```php
+// Android
+$params = [
+    'type' => 'unicast',
+    'production_mode' => 'false',
+    'device_tokens' => 'xx(Android为44位)',
+    'payload' => [
+        'display_type' => 'message',
+        'body' => [
+            'custom' => '自定义custom',
+        ],
+    ],
+    'policy' => [
+        'expire_time' => '2013-10-30 12:00:00',
+    ],
+    'description' => '测试单播消息-Android',
+];
+
+print_r($android->send($params));
+
+// iOS
+$params = [
+    'type' => 'unicast',
+    'production_mode' => 'false',
+    'device_tokens' => 'xx(iOS为64位)',
+    'payload' => [
+        'aps' => [
+            'alert' => [
+                'title' => 'title',
+                'subtitle' => 'subtitle',
+                'body' => 'body',
+            ]
+        ],
+    ],
+    'policy' => [
+        'expire_time' => '2021-04-09 10:23:24',
+    ],
+    'description' => '测试单播消息-iOS',
+];
+print_r($push->send($params));
+```
+
+
 
 ## 任务类消息状态查询
-
+```php
+$params = [
+    'task_id' => 'xx'
+];
+print_r($push->status($params));
+```
 ## 任务类消息取消
-
+```php
+$params = [
+    'task_id' => 'xx'
+];
+print_r($push->cancel($params));
+```
 ## 文件上传
-
+```php
+$params = [
+    'content' => 'xx'
+];
+print_r($push->upload($params));
+```
 
 ## 参考
 * [U-Push API 集成文档](https://developer.umeng.com/docs/66632/detail/68343)
