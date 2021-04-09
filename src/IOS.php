@@ -15,6 +15,7 @@ use Hedeqiang\UMeng\notification\ios\IOSBroadcast;
 use Hedeqiang\UMeng\notification\ios\IOSCustomizedcast;
 use Hedeqiang\UMeng\notification\ios\IOSFilecast;
 use Hedeqiang\UMeng\notification\ios\IOSGroupcast;
+use Hedeqiang\UMeng\notification\ios\IOSListcast;
 use Hedeqiang\UMeng\notification\ios\IOSUnicast;
 
 /**
@@ -230,6 +231,37 @@ class IOS
             }
 
             return $customizedcast->send();
+        } catch (\Exception $e) {
+            throw new \Exception($e->getMessage(), $e->getCode(), $e);
+        }
+    }
+
+    /**
+     * @return mixed
+     *
+     * @throws \Exception
+     */
+    public function sendIOSListcast(array $params = [], array $customized = [])
+    {
+        try {
+            $unicast = new IOSListcast();
+            $unicast->setAppMasterSecret($this->appMasterSecret);
+            $unicast->setPredefinedKeyValue('appkey', $this->appkey);
+            $unicast->setPredefinedKeyValue('timestamp', $this->timestamp);
+            // Set 'production_mode' to 'true' if your app is under production mode
+            $unicast->setPredefinedKeyValue('production_mode', $this->production_mode);
+
+            foreach ($params as $key => $val) {
+                $unicast->setPredefinedKeyValue($key, $val);
+            }
+            if (count($customized)) {
+                foreach ($customized as $key => $val) {
+                    $unicast->setCustomizedField($key, $val);
+                }
+            }
+
+            return $unicast->send();
+            //print("Sent SUCCESS\r\n");
         } catch (\Exception $e) {
             throw new \Exception($e->getMessage(), $e->getCode(), $e);
         }

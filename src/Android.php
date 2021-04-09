@@ -15,6 +15,7 @@ use Hedeqiang\UMeng\notification\android\AndroidBroadcast;
 use Hedeqiang\UMeng\notification\android\AndroidCustomizedcast;
 use Hedeqiang\UMeng\notification\android\AndroidFilecast;
 use Hedeqiang\UMeng\notification\android\AndroidGroupcast;
+use Hedeqiang\UMeng\notification\android\AndroidListcast;
 use Hedeqiang\UMeng\notification\android\AndroidUnicast;
 
 /**
@@ -206,6 +207,31 @@ class Android
             }
 
             return $customizedcast->send();
+        } catch (\Exception $e) {
+            throw new \Exception($e->getMessage(), $e->getCode(), $e);
+        }
+    }
+
+    /**
+     * @return mixed
+     *
+     * @throws \Exception
+     */
+    public function sendAndroidListcast(array $params = [])
+    {
+        try {
+            $unicast = new AndroidListcast();
+            $unicast->setAppMasterSecret($this->appMasterSecret);
+            $unicast->setPredefinedKeyValue('appkey', $this->appkey);
+            $unicast->setPredefinedKeyValue('timestamp', $this->timestamp);
+            $unicast->setPredefinedKeyValue('production_mode', $this->production_mode);
+
+            foreach ($params as $key => $val) {
+                $unicast->setPredefinedKeyValue($key, $val);
+            }
+
+            return $unicast->send();
+            //print("Sent SUCCESS\r\n");
         } catch (\Exception $e) {
             throw new \Exception($e->getMessage(), $e->getCode(), $e);
         }
