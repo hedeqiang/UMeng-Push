@@ -27,6 +27,7 @@ class JPush extends Facade
 
     /**
      * Return the facade accessor.
+     *
      * @return \Hedeqiang\UMeng\Android
      */
     public static function android()
@@ -36,11 +37,11 @@ class JPush extends Facade
 
     /**
      * Return the facade accessor.
+     *
      * @return \Hedeqiang\UMeng\IOS
      */
     public static function ios()
     {
         return app('push.ios');
     }
-
 }
