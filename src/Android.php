@@ -30,6 +30,7 @@ class Android
 
     /**
      * Android constructor.
+     *
      * @param array $config
      */
     public function __construct(array $config)
@@ -39,7 +40,9 @@ class Android
 
     /**
      * 消息发送
+     *
      * @param array $params
+     *
      * @return array
      */
     public function send(array $params): array
@@ -51,7 +54,9 @@ class Android
 
     /**
      * 任务类消息状态查询.
+     *
      * @param array $params
+     *
      * @return array
      */
     public function status(array $params): array
@@ -63,7 +68,9 @@ class Android
 
     /**
      * 任务类消息取消.
+     *
      * @param array $params
+     *
      * @return array
      */
     public function cancel(array $params): array
@@ -75,7 +82,9 @@ class Android
 
     /**
      * 文件上传.
+     *
      * @param array $params
+     *
      * @return array
      */
     public function upload(array $params): array
@@ -86,9 +95,11 @@ class Android
     }
 
     /**
-     * 返回 代签名的 Url
-     * @param array $body
+     * 返回 代签名的 Url.
+     *
+     * @param array  $body
      * @param string $type
+     *
      * @return string
      */
     protected function buildEndpoint(array $body, string $type): string
@@ -109,30 +120,35 @@ class Android
     }
 
     /**
-     * 生成签名
+     * 生成签名.
+     *
      * @param string $endpoint
      * @param $body
+     *
      * @return string
      */
     protected function getSign(string $endpoint, $body): string
     {
         switch ($this->config->get('deviceType')) {
             case 'Android':
-                $sign = md5('POST' . $endpoint . $body . $this->config->get('Android.appMasterSecret'));
+                $sign = md5('POST'.$endpoint.$body.$this->config->get('Android.appMasterSecret'));
                 break;
             case 'iOS':
-                $sign = md5('POST' . $endpoint . $body . $this->config->get('iOS.appMasterSecret'));
+                $sign = md5('POST'.$endpoint.$body.$this->config->get('iOS.appMasterSecret'));
                 break;
             default:
                 break;
         }
-        return $endpoint . '?sign=' . $sign;
+
+        return $endpoint.'?sign='.$sign;
     }
 
     /**
      * 获取 URL 和参数.
-     * @param array $params
+     *
+     * @param array  $params
      * @param string $type
+     *
      * @return array
      */
     protected function getUrl(array $params, string $type): array
@@ -156,12 +172,14 @@ class Android
                     break;
             }
         }
+
         return [$this->buildEndpoint($params, $type), $params];
     }
 
     /**
      * @param string $url
      * @param $params
+     *
      * @return array
      */
     protected function curl(string $url, $params): array
@@ -175,6 +193,6 @@ class Android
             return json_decode($responseBodyAsString, true);
         }
 
-        return json_decode((string)$response, true);
+        return json_decode((string) $response, true);
     }
 }
