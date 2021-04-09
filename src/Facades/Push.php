@@ -13,7 +13,7 @@ namespace Hedeqiang\UMeng\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
-class JPush extends Facade
+class Push extends Facade
 {
     /**
      * Return the facade accessor.
