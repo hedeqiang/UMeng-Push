@@ -31,7 +31,7 @@ class Push
      * @param array $params
      * @return mixed
      */
-    public function send($params = []): array
+    public function send(array $params): array
     {
         list($url, $params) = $this->getUrl($params, 'send');
         return $this->curl($url, $params);
@@ -135,7 +135,7 @@ class Push
                     break;
             }
         }
-        
+
         if (!array_key_exists('timestamp', $params)) {
             $params['timestamp'] = time();
         }
@@ -144,9 +144,9 @@ class Push
 
 
     /**
-     * @param $url
+     * @param string $url
      * @param $params
-     * @return array|mixed
+     * @return array
      */
     protected function curl(string $url, $params): array
     {
