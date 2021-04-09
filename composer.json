@@ -24,5 +24,12 @@
         "psr-4": {
             "Hedeqiang\\UMeng\\": "./src/"
         }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Hedeqiang\\UMeng\\PushServiceProvider"
+            ]
+        }
     }
 }
