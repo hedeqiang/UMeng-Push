@@ -29,7 +29,7 @@ class Push
     /**
      * 消息发送
      * @param array $params
-     * @return mixed
+     * @return array
      */
     public function send(array $params): array
     {
@@ -40,7 +40,7 @@ class Push
     /**
      * 任务类消息状态查询
      * @param array $params
-     * @return mixed
+     * @return array
      */
     public function status(array $params): array
     {
@@ -51,7 +51,7 @@ class Push
     /**
      * 任务类消息取消
      * @param array $params
-     * @return mixed
+     * @return array
      */
     public function cancel(array $params): array
     {
@@ -62,7 +62,7 @@ class Push
     /**
      * 文件上传
      * @param array $params
-     * @return mixed
+     * @return array
      */
     public function upload(array $params): array
     {
