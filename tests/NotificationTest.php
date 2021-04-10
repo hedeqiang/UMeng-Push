@@ -11,15 +11,15 @@
 
 namespace Hedeqiang\UMeng\Tests;
 
-use PHPUnit\Framework\TestCase;
 use Hedeqiang\UMeng\Android;
+use PHPUnit\Framework\TestCase;
 
 class NotificationTest extends TestCase
 {
     protected $config = [
-        'appKey' => '5b1df163f********',
+        'appKey'          => '5b1df163f********',
         'appMasterSecret' => 'i7tzdarswt***********',
-        'debug' => false,
+        'debug'           => false,
     ];
 
     public function testsendAndroidCustomizedcast()
@@ -27,9 +27,9 @@ class NotificationTest extends TestCase
         $andorid = new Android($this->config);
 
         $params = [
-            'ticker' => '测试提示文字',
-            'title' => '测试标题',
-            'text' => '测试文字描述',
+            'ticker'     => '测试提示文字',
+            'title'      => '测试标题',
+            'text'       => '测试文字描述',
             'after_open' => 'go_app',
         ];
         $extra = [
