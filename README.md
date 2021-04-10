@@ -113,6 +113,58 @@ $params = [
 print_r($push->upload($params));
 ```
 
+
+
+## 在 Laravel 中使用
+
+### 发布配置文件
+```php
+php artisan vendor:publish --tag=push
+or 
+php artisan vendor:publish --provider="Hedeqiang\UMeng\PushServiceProvider"
+```
+
+### 编写配置文件
+```php
+ANDROID_PUSH_APP_KEY=
+ANDROID_PUSH_APP_MASTER_SECRET=
+ANDROID_PUSH_PRODUCTION_MODE=
+
+IOS_PUSH_APP_KEY=
+IOS_PUSH_APP_MASTER_SECRET=
+IOS_PUSH_PRODUCTION_MODE=
+```
+
+### 使用
+
+#### 服务名访问
+```php
+public function index()
+{
+    return app('push.android')->send([]);
+    return app('push.android')->sta([]);
+    return app('push.android')->send([]);
+    return app('push.android')->send([]);
+    
+    return app('push.ios')->send([]);
+}
+```
+
+#### Facades 门面使用(可以提示)
+```php
+use Hedeqiang\UMeng\Facades\Push;
+
+public function index()
+{
+    Push::android()->send([]);
+    Push::android()->status([]);
+    Push::android()->cancel([]);
+    Push::android()->upload([]);
+    
+    Push::ios()->upload([]);
+}
+```
+
 ## 参考
 * [U-Push API 集成文档](https://developer.umeng.com/docs/66632/detail/68343)
 
