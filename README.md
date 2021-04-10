@@ -45,7 +45,7 @@ $android = new Android($config);
 $ios = new IOS($config);
 ```
 
-> params 接受数组，安装官方文档示例，转化为数组格式即可 `appkey`` 和 `timestamp` 可传可不传。以下为示例代码。可供参考
+> params 接受数组，安装官方文档示例，转化为数组格式即可 `appkey` 和 `timestamp` 可传可不传。以下为示例代码。可供参考
 
 
 ## 消息发送
