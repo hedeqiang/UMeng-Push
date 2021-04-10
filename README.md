@@ -145,9 +145,9 @@ IOS_PUSH_PRODUCTION_MODE=
 public function index()
 {
     return app('push.android')->send([]);
-    return app('push.android')->sta([]);
-    return app('push.android')->send([]);
-    return app('push.android')->send([]);
+    return app('push.android')->status([]);
+    return app('push.android')->cancel([]);
+    return app('push.android')->upload([]);
     
     return app('push.ios')->send([]);
 }
@@ -164,7 +164,7 @@ public function index()
     Push::android()->cancel([]);
     Push::android()->upload([]);
     
-    Push::ios()->upload([]);
+    Push::ios()->send([]);
 }
 ```
 
