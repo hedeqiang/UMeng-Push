@@ -9,6 +9,9 @@
 
 > 如需极光推送 请前往 [极光推送](https://github.com/hedeqiang/JPush)
 
+
+> v2.x 推翻重写之前的官方 demo。用法更简单 如需v1.x 请查看 master 分支 
+
 ## Installing
 
 ```shell
