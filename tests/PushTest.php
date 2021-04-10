@@ -11,10 +11,8 @@
 
 namespace Hedeqiang\UMeng\Tests;
 
-use Hedeqiang\UMeng\Android;
 use PHPUnit\Framework\TestCase;
 
 class PushTest extends TestCase
 {
-   
 }
