@@ -116,16 +116,7 @@ class Android
      */
     protected function getSign(string $endpoint, $body): string
     {
-        switch ($this->config->get('deviceType')) {
-            case 'Android':
-                $sign = md5('POST' . $endpoint . $body . $this->config->get('Android.appMasterSecret'));
-                break;
-            case 'iOS':
-                $sign = md5('POST' . $endpoint . $body . $this->config->get('iOS.appMasterSecret'));
-                break;
-            default:
-                break;
-        }
+        $sign = md5('POST' . $endpoint . $body . $this->config->get('Android.appMasterSecret'));
         return $endpoint . '?sign=' . $sign;
     }
 
@@ -140,21 +131,13 @@ class Android
         if (!array_key_exists('timestamp', $params)) {
             $params['timestamp'] = time();
         }
+        
         if (!array_key_exists('production_mode', $params)) {
             $params['production_mode'] = true;
         }
 
         if (!array_key_exists('appKey', $params)) {
-            switch ($this->config->get('deviceType')) {
-                case 'Android':
-                    $params['appkey'] = $this->config->get('Android.appKey');
-                    break;
-                case 'iOS':
-                    $params['appkey'] = $this->config->get('iOS.appKey');
-                    break;
-                default:
-                    break;
-            }
+            $params['appkey'] = $this->config->get('Android.appKey');
         }
         return [$this->buildEndpoint($params, $type), $params];
     }
