@@ -35,7 +35,7 @@ class PushServiceProvider extends \Illuminate\Support\ServiceProvider
         $this->app->alias(IOS::class, 'push.ios');
     }
 
-    public function provides()
+    public function provides(): array
     {
         return ['push.android', 'push.ios'];
     }

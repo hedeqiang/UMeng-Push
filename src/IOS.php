@@ -11,6 +11,7 @@
 
 namespace Hedeqiang\UMeng;
 
+use Exception;
 use Hedeqiang\UMeng\Traits\HasHttpRequest;
 
 class IOS
@@ -168,7 +169,7 @@ class IOS
     {
         try {
             $response = $this->postJson($url, $params);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             $response = $e->getResponse();
             $responseBodyAsString = $response->getBody()->getContents();
 

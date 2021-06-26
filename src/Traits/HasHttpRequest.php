@@ -19,15 +19,17 @@ use Psr\Http\Message\ResponseInterface;
  */
 trait HasHttpRequest
 {
+
     /**
      * Make a get request.
      *
-     * @param array $query
-     * @param array $headers
+     * @param  string  $endpoint
+     * @param  array   $query
+     * @param  array   $headers
      *
      * @return array
      */
-    protected function get(string $endpoint, $query = [], $headers = [])
+    protected function get(string $endpoint, array $query = [], array $headers = [])
     {
         return $this->request('get', $endpoint, [
             'headers' => $headers,
@@ -38,12 +40,13 @@ trait HasHttpRequest
     /**
      * Make a post request.
      *
-     * @param $options
-     * @param array $headers
+     * @param  string  $endpoint
+     * @param          $options
+     * @param  array   $headers
      *
      * @return array
      */
-    protected function post(string $endpoint, $options, $headers = [])
+    protected function post(string $endpoint, $options, array $headers = [])
     {
         return $this->request('post', $endpoint, [
             'headers'   => $headers,
@@ -55,12 +58,12 @@ trait HasHttpRequest
      * Make a post request with json params.
      *
      * @param       $endpoint
-     * @param array $params
-     * @param array $headers
+     * @param  array  $params
+     * @param  array  $headers
      *
      * @return array
      */
-    protected function postJson($endpoint, $params = [], $headers = [])
+    protected function postJson($endpoint, array $params = [], array $headers = []): array
     {
         return $this->request('post', $endpoint, [
             'headers' => $headers,
@@ -70,12 +73,12 @@ trait HasHttpRequest
 
     /**
      * @param $endpoint
-     * @param array $headers
-     * @param array $query
+     * @param  array  $headers
+     * @param  array  $query
      *
      * @return array
      */
-    protected function delete($endpoint, $headers = [], $query = [])
+    protected function delete($endpoint, array $headers = [], array $query = []): array
     {
         return $this->request('delete', $endpoint, [
             'headers' => $headers,
@@ -86,11 +89,11 @@ trait HasHttpRequest
     /**
      * @param $endpoint
      * @param $params
-     * @param array $headers
+     * @param  array  $headers
      *
      * @return array
      */
-    protected function put($endpoint, $params, $headers = [])
+    protected function put($endpoint, $params, array $headers = []): array
     {
         return $this->request('put', $endpoint, [
             'headers' => $headers,
@@ -101,11 +104,11 @@ trait HasHttpRequest
     /**
      * Make a http request.
      *
-     * @param array $options http://docs.guzzlephp.org/en/latest/request-options.html
+     * @param  array  $options  http://docs.guzzlephp.org/en/latest/request-options.html
      *
      * @return array
      */
-    protected function request(string $method, string $endpoint, $options = [])
+    protected function request(string $method, string $endpoint, array $options = [])
     {
         return $this->unwrapResponse($this->getHttpClient($this->getBaseOptions())->{$method}($endpoint, $options));
     }
@@ -126,11 +129,13 @@ trait HasHttpRequest
     /**
      * Return http client.
      *
-     * @return \GuzzleHttp\Client
+     * @param  array  $options
+     *
+     * @return Client
      *
      * @codeCoverageIgnore
      */
-    protected function getHttpClient(array $options = [])
+    protected function getHttpClient(array $options = []): Client
     {
         return new Client($options);
     }
