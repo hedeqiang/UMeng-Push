@@ -62,7 +62,7 @@ trait HasHttpRequest
      *
      * @return array
      */
-    protected function postJson($endpoint, array $params = [], array $headers = []): array
+    protected function postJson($endpoint, array $params = [], array $headers = [])
     {
         return $this->request('post', $endpoint, [
             'headers' => $headers,
@@ -77,7 +77,7 @@ trait HasHttpRequest
      *
      * @return array
      */
-    protected function delete($endpoint, array $headers = [], array $query = []): array
+    protected function delete($endpoint, array $headers = [], array $query = [])
     {
         return $this->request('delete', $endpoint, [
             'headers' => $headers,
@@ -92,7 +92,7 @@ trait HasHttpRequest
      *
      * @return array
      */
-    protected function put($endpoint, $params, array $headers = []): array
+    protected function put($endpoint, $params, array $headers = [])
     {
         return $this->request('put', $endpoint, [
             'headers' => $headers,
