@@ -149,7 +149,7 @@ class Android
         }
 
         if (!array_key_exists('production_mode', $params)) {
-            $params['production_mode'] = true;
+            $params['production_mode'] = $this->config->get('Android.productionMode');;
         }
 
         if (!array_key_exists('appKey', $params)) {
