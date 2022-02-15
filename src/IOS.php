@@ -149,7 +149,7 @@ class IOS
             $params['timestamp'] = time();
         }
         if (!array_key_exists('production_mode', $params)) {
-            $params['production_mode'] = $this->config->get('iOS.productionMode');;
+            $params['production_mode'] = $this->config->get('iOS.productionMode');
         }
 
         if (!array_key_exists('appKey', $params)) {
