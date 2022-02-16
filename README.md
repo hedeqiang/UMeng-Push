@@ -54,7 +54,6 @@ $ios = new IOS($config);
 // Android
 $params = [
     'type' => 'unicast',
-    'production_mode' => 'false',
     'device_tokens' => 'xx(Android为44位)',
     'payload' => [
         'display_type' => 'message',
@@ -73,7 +72,6 @@ print_r($android->send($params));
 // iOS
 $params = [
     'type' => 'unicast',
-    'production_mode' => 'false',
     'device_tokens' => 'xx(iOS为64位)',
     'payload' => [
         'aps' => [
