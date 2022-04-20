@@ -20,6 +20,9 @@ return (new PhpCsFixer\Config())
         'no_useless_return' => true,
         'php_unit_construct' => true,
         'php_unit_strict' => true,
+        'binary_operator_spaces' => [
+            'operators' => ['=>' => 'align_single_space_minimal']
+        ]
     ])
     ->setFinder(
         PhpCsFixer\Finder::create()
