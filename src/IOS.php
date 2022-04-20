@@ -19,20 +19,18 @@ class IOS
     use HasHttpRequest;
 
     //  消息发送
-    const ENDPOINT_TEMPLATE_SEND = 'https://msgapi.umeng.com/api/send';
+    public const ENDPOINT_TEMPLATE_SEND = 'https://msgapi.umeng.com/api/send';
     // 任务类消息状态查询
-    const ENDPOINT_TEMPLATE_STATUS = 'https://msgapi.umeng.com/api/status';
+    public const ENDPOINT_TEMPLATE_STATUS = 'https://msgapi.umeng.com/api/status';
     // 任务类消息取消
-    const ENDPOINT_TEMPLATE_CANCEL = 'https://msgapi.umeng.com/api/cancel';
+    public const ENDPOINT_TEMPLATE_CANCEL = 'https://msgapi.umeng.com/api/cancel';
     // 文件上传
-    const ENDPOINT_TEMPLATE_UPLOAD = 'https://msgapi.umeng.com/upload';
+    public const ENDPOINT_TEMPLATE_UPLOAD = 'https://msgapi.umeng.com/upload';
 
     protected $config;
 
     /**
      * Android constructor.
-     *
-     * @param array $config
      */
     public function __construct(array $config)
     {
@@ -41,10 +39,6 @@ class IOS
 
     /**
      * 消息发送
-     *
-     * @param array $params
-     *
-     * @return array
      */
     public function send(array $params): array
     {
@@ -55,10 +49,6 @@ class IOS
 
     /**
      * 任务类消息状态查询.
-     *
-     * @param array $params
-     *
-     * @return array
      */
     public function status(array $params): array
     {
@@ -69,10 +59,6 @@ class IOS
 
     /**
      * 任务类消息取消.
-     *
-     * @param array $params
-     *
-     * @return array
      */
     public function cancel(array $params): array
     {
@@ -83,10 +69,6 @@ class IOS
 
     /**
      * 文件上传.
-     *
-     * @param array $params
-     *
-     * @return array
      */
     public function upload(array $params): array
     {
@@ -97,11 +79,6 @@ class IOS
 
     /**
      * 返回 代签名的 Url.
-     *
-     * @param array  $body
-     * @param string $type
-     *
-     * @return string
      */
     protected function buildEndpoint(array $body, string $type): string
     {
@@ -123,10 +100,7 @@ class IOS
     /**
      * 生成签名.
      *
-     * @param string $endpoint
      * @param $body
-     *
-     * @return string
      */
     protected function getSign(string $endpoint, $body): string
     {
@@ -137,11 +111,6 @@ class IOS
 
     /**
      * 获取 URL 和参数.
-     *
-     * @param array  $params
-     * @param string $type
-     *
-     * @return array
      */
     protected function getUrl(array $params, string $type): array
     {
@@ -160,10 +129,7 @@ class IOS
     }
 
     /**
-     * @param string $url
      * @param $params
-     *
-     * @return array
      */
     protected function curl(string $url, $params): array
     {
