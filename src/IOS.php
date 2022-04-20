@@ -19,13 +19,13 @@ class IOS
     use HasHttpRequest;
 
     //  消息发送
-    public const ENDPOINT_TEMPLATE_SEND = 'https://msgapi.umeng.com/api/send';
+    const ENDPOINT_TEMPLATE_SEND = 'https://msgapi.umeng.com/api/send';
     // 任务类消息状态查询
-    public const ENDPOINT_TEMPLATE_STATUS = 'https://msgapi.umeng.com/api/status';
+    const ENDPOINT_TEMPLATE_STATUS = 'https://msgapi.umeng.com/api/status';
     // 任务类消息取消
-    public const ENDPOINT_TEMPLATE_CANCEL = 'https://msgapi.umeng.com/api/cancel';
+    const ENDPOINT_TEMPLATE_CANCEL = 'https://msgapi.umeng.com/api/cancel';
     // 文件上传
-    public const ENDPOINT_TEMPLATE_UPLOAD = 'https://msgapi.umeng.com/upload';
+    const ENDPOINT_TEMPLATE_UPLOAD = 'https://msgapi.umeng.com/upload';
 
     protected $config;
 
