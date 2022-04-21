@@ -22,10 +22,6 @@ trait HasHttpRequest
     /**
      * Make a get request.
      *
-     * @param string $endpoint
-     * @param array  $query
-     * @param array  $headers
-     *
      * @return array
      */
     protected function get(string $endpoint, array $query = [], array $headers = [])
@@ -39,9 +35,7 @@ trait HasHttpRequest
     /**
      * Make a post request.
      *
-     * @param string $endpoint
-     * @param        $options
-     * @param array  $headers
+     * @param $options
      *
      * @return array
      */
@@ -56,9 +50,7 @@ trait HasHttpRequest
     /**
      * Make a post request with json params.
      *
-     * @param       $endpoint
-     * @param array $params
-     * @param array $headers
+     * @param $endpoint
      *
      * @return array
      */
@@ -72,8 +64,6 @@ trait HasHttpRequest
 
     /**
      * @param $endpoint
-     * @param array $headers
-     * @param array $query
      *
      * @return array
      */
@@ -88,7 +78,6 @@ trait HasHttpRequest
     /**
      * @param $endpoint
      * @param $params
-     * @param array $headers
      *
      * @return array
      */
@@ -127,10 +116,6 @@ trait HasHttpRequest
 
     /**
      * Return http client.
-     *
-     * @param array $options
-     *
-     * @return Client
      *
      * @codeCoverageIgnore
      */
