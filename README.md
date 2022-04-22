@@ -131,20 +131,7 @@ php bin/hyperf.php vendor:publish hedeqiang/umeng
 use Hedeqiang\UMeng\IOS;
 use Hyperf\Utils\ApplicationContext;
 
-ApplicationContext::getContainer()->get(IOS::class)->send([
-    'type' => 'customizedcast',
-    'alias_type' => 'kycc',
-    'alias' => '1649848341551583',
-    'payload' => [
-        'aps' => [
-            'alert' => [
-                'title' => 'title',
-                'subtitle' => 'subtitle',
-                'body' => 'body',
-            ]
-        ],
-    ],
-]);
+ApplicationContext::getContainer()->get(IOS::class)->send([]);
 ```
 
 ## 在 Laravel 中使用
