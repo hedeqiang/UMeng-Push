@@ -14,7 +14,7 @@ namespace Hedeqiang\UMeng;
 use Exception;
 use Hedeqiang\UMeng\Traits\HasHttpRequest;
 
-class IOS
+class IOS implements PushInterface
 {
     use HasHttpRequest;
 

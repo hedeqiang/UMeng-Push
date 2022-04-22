@@ -13,7 +13,7 @@ namespace Hedeqiang\UMeng;
 
 use Hedeqiang\UMeng\Traits\HasHttpRequest;
 
-class Android
+class Android implements PushInterface
 {
     use HasHttpRequest;
 

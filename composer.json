@@ -40,6 +40,9 @@
             "providers": [
                 "Hedeqiang\\UMeng\\PushServiceProvider"
             ]
+        },
+        "hyperf": {
+            "config": "Hedeqiang\\UMeng\\ConfigProvider"
         }
     }
 }
