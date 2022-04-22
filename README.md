@@ -6,6 +6,7 @@
 [![996.icu](https://img.shields.io/badge/link-996.icu-red.svg)](https://996.icu)
 [![LICENSE](https://img.shields.io/badge/license-Anti%20996-blue.svg)](https://github.com/996icu/996.ICU/blob/master/LICENSE)
 [![HitCount](http://hits.dwyl.io/hedeqiang/umeng.svg)](http://hits.dwyl.io/hedeqiang/umeng)
+[![PHPUnit](https://github.com/hedeqiang/UMeng-Push/actions/workflows/test.yml/badge.svg)](https://github.com/hedeqiang/UMeng-Push/actions/workflows/test.yml)
 
 > 如需极光推送 请前往 [极光推送](https://github.com/hedeqiang/JPush)
 
@@ -114,11 +115,42 @@ $params = [
 print_r($push->upload($params));
 ```
 
+## 在 Hyperf 中使用
 
+### 发布配置文件
+
+```shell
+php bin/hyperf.php vendor:publish hedeqiang/umeng
+```
+
+### 发送
+
+```php
+<?php
+
+use Hedeqiang\UMeng\IOS;
+use Hyperf\Utils\ApplicationContext;
+
+ApplicationContext::getContainer()->get(IOS::class)->send([
+    'type' => 'customizedcast',
+    'alias_type' => 'kycc',
+    'alias' => '1649848341551583',
+    'payload' => [
+        'aps' => [
+            'alert' => [
+                'title' => 'title',
+                'subtitle' => 'subtitle',
+                'body' => 'body',
+            ]
+        ],
+    ],
+]);
+```
 
 ## 在 Laravel 中使用
 
 ### 发布配置文件
+
 ```php
 php artisan vendor:publish --tag=push
 or 
@@ -126,6 +158,7 @@ php artisan vendor:publish --provider="Hedeqiang\UMeng\PushServiceProvider"
 ```
 
 ### 编写配置文件
+
 ```php
 ANDROID_PUSH_APP_KEY=
 ANDROID_PUSH_APP_MASTER_SECRET=
