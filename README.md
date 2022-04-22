@@ -114,11 +114,42 @@ $params = [
 print_r($push->upload($params));
 ```
 
+## 在 Hyperf 中使用
 
+### 发布配置文件
+
+```shell
+php bin/hyperf.php vendor:publish hedeqiang/umeng
+```
+
+### 发送
+
+```php
+<?php
+
+use Hedeqiang\UMeng\IOS;
+use Hyperf\Utils\ApplicationContext;
+
+ApplicationContext::getContainer()->get(IOS::class)->send([
+    'type' => 'customizedcast',
+    'alias_type' => 'kycc',
+    'alias' => '1649848341551583',
+    'payload' => [
+        'aps' => [
+            'alert' => [
+                'title' => 'title',
+                'subtitle' => 'subtitle',
+                'body' => 'body',
+            ]
+        ],
+    ],
+]);
+```
 
 ## 在 Laravel 中使用
 
 ### 发布配置文件
+
 ```php
 php artisan vendor:publish --tag=push
 or 
@@ -126,6 +157,7 @@ php artisan vendor:publish --provider="Hedeqiang\UMeng\PushServiceProvider"
 ```
 
 ### 编写配置文件
+
 ```php
 ANDROID_PUSH_APP_KEY=
 ANDROID_PUSH_APP_MASTER_SECRET=
