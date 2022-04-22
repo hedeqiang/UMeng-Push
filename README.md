@@ -6,6 +6,7 @@
 [![996.icu](https://img.shields.io/badge/link-996.icu-red.svg)](https://996.icu)
 [![LICENSE](https://img.shields.io/badge/license-Anti%20996-blue.svg)](https://github.com/996icu/996.ICU/blob/master/LICENSE)
 [![HitCount](http://hits.dwyl.io/hedeqiang/umeng.svg)](http://hits.dwyl.io/hedeqiang/umeng)
+[![PHPUnit](https://github.com/hedeqiang/UMeng-Push/actions/workflows/test.yml/badge.svg)](https://github.com/hedeqiang/UMeng-Push/actions/workflows/test.yml)
 
 > 如需极光推送 请前往 [极光推送](https://github.com/hedeqiang/JPush)
 
