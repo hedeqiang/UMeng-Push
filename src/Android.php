@@ -81,7 +81,7 @@ class Android implements PushInterface
      */
     protected function buildEndpoint(array $body, string $type): string
     {
-        $body = json_encode($body, true);
+        $body = json_encode($body);
         switch ($type) {
             case 'send':
                 return $this->getSign(self::ENDPOINT_TEMPLATE_SEND, $body);
