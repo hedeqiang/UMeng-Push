@@ -137,7 +137,7 @@ class IOS implements PushInterface
             $response = $this->postJson($url, $params);
         } catch (Exception $e) {
             $response = $e->getResponse();
-            $responseBodyAsString = $response->getBody()->getContents();
+            $responseBodyAsString = (string) $response->getBody();
 
             return json_decode($responseBodyAsString, true);
         }

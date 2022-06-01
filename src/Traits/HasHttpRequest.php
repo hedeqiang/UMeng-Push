@@ -132,7 +132,7 @@ trait HasHttpRequest
     protected function unwrapResponse(ResponseInterface $response)
     {
         $contentType = $response->getHeaderLine('Content-Type');
-        $contents = $response->getBody()->getContents();
+        $contents = (string) $response->getBody();
         if (false !== stripos($contentType, 'json') || stripos($contentType, 'javascript')) {
             return json_decode($contents, true);
         } elseif (false !== stripos($contentType, 'xml')) {
